@@ -34,11 +34,6 @@ services:
     image: bitnami/nginx
     container_name: glpi-nginx
     restart: unless-stopped
-    # environment:
-    #   TIMEZONE: ${TIMEZONE:-"America/Sao_Paulo"}
-    #   # PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-"512M"}
-    #   # PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-"2048M"}
-    #   # PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-"2048M"}
     volumes:
       # - glpi_nginx:/app
       - /etc/localtime:/etc/localtime:ro
