@@ -1,0 +1,58 @@
+services:
+  phpfpm:
+    image: bitnami/php-fpm
+    container_name: glpi-phpfpm
+    restart: unless-stopped
+    environment:
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-"512M"}
+      PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-"2048M"}
+      PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-"2048M"}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./php.ini:/opt/bitnami/php/etc/php.ini:ro
+      - ./glpi_app:/app
+    # ports:
+    #   - "9000:9000"
+  
+  mariadb:
+    image: bitnami/mariadb
+    container_name: glpi-mariadb
+    restart: unless-stopped
+    environment:
+      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD:-"yes"}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-"Senha_do_MariaDB_root"}
+      MARIADB_USER: ${MARIADB_USER:-"glpi_user"}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-"glpi_password"}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-"glpi_database"}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - glpi_db:/opt/mariadb
+    # ports:
+    #   - "3306:3306"
+
+  nginx:
+    image: bitnami/nginx
+    container_name: glpi-nginx
+    restart: unless-stopped
+    # environment:
+    #   TIMEZONE: ${TIMEZONE:-"America/Sao_Paulo"}
+    #   # PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-"512M"}
+    #   # PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-"2048M"}
+    #   # PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-"2048M"}
+    volumes:
+      # - glpi_nginx:/app
+      - /etc/localtime:/etc/localtime:ro
+      - ./nginx-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/nginx-server-block.conf
+      - ./glpi_app:/app
+    ports:
+      # - "80:80"
+      - "80:8080"
+      # - "443:443"
+    depends_on:
+      - phpfpm
+      - mariadb
+
+volumes:
+  # glpi_app:
+  glpi_db:
+  # glpi_nginx:
