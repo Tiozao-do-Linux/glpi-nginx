@@ -24,7 +24,7 @@ on:
         
 jobs:
   log-the-inputs:
-    runs-on: oracle-04
+    runs-on: self-hosted
     steps:
       - run: |
           echo "Log level: $LEVEL"
