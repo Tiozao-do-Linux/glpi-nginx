@@ -1,5 +1,4 @@
-
-# GLPI LTS
+# GLPI - LTS (Apenas uma POC)
 
 Embora já exista uma **Versão Oficial do GLPI** (https://github.com/glpi-project/glpi) no **Docker Hub** (https://hub.docker.com/r/glpi/glpi), eu acredito que dê pra utilizar outras *Imagens Docker* mais performáticas num `docker-compose.yml` e apenas mapear o código fonte dentro desses containers.
 
@@ -12,15 +11,11 @@ Embora já exista uma **Versão Oficial do GLPI** (https://github.com/glpi-proje
 # Como obter a última versão LTS do GLPI
 
 ```bash
-
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
-
 
 curl -# -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
-
 tar xzvf glpi-${LATEST}.tgz -C glpi_app/
-
 ```
 
 # Exemplo básico
