@@ -30,6 +30,13 @@ glpi-mariadb   bitnami/mariadb   "/opt/bitnami/script…"   mariadb   About a mi
 glpi-nginx     bitnami/nginx     "/opt/bitnami/script…"   nginx     About a minute ago   Up About a minute   8443/tcp, 0.0.0.0:80->8080/tcp, [::]:80->8080/tcp
 glpi-phpfpm    bitnami/php-fpm   "php-fpm -F --pid /o…"   phpfpm    About a minute ago   Up About a minute   9000/tcp
 ```
+## Tamanho das imagens
+```bash
+docker images | grep -E "^bitnami/(mariadb|nginx|php-fpm).*latest"
+bitnami/php-fpm               latest            9e3e0516c5bd   2 days ago      360MB
+bitnami/nginx                 latest            6362258f3406   2 weeks ago     185MB
+bitnami/mariadb               latest            d3a04feaa812   2 weeks ago     434MB
+```
 
 ## Abrir o browser
 
