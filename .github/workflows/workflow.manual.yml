@@ -38,7 +38,7 @@ on:
 
 jobs:
   log-the-inputs:
-    runs-on: [self-hosted, "${{ inputs.docker-server }}"]
+    runs-on: [ "${{ inputs.docker-server }}" ]
     steps:
       - run: |
           echo "Log level: $LEVEL"
