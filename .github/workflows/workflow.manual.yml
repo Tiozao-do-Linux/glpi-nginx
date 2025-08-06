@@ -26,15 +26,25 @@ on:
           - prd
           - hml
           - dev
+      docker-server:
+        description: Selecione o servidor docker
+        required: true
+        type: choice
+        options:
+        - ubuntu-latest
+        - self-host
+        - oracle-04
+        - oracle-01
 
 jobs:
   log-the-inputs:
-    runs-on: self-hosted
+    runs-on: [self-hosted, "${{ inputs.docker-server }}"]
     steps:
       - run: |
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
+          echo "docker-server: ${{ inputs.docker-server }}"
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
