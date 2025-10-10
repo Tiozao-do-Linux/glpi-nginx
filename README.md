@@ -1,3 +1,18 @@
+# Imagens Bitnami
+
+Durante 18 anos, as [Imagens Bitnami](https://github.com/bitnami/containers) eram livres para uso sem requerer subscrição/pagamento.
+
+Desde 28/Ago/2025 a maioria das imagens requerem subscrição. Se houve algum container rodando com imagens que foram afetadas, a mensagem é mostrada:
+* NOTICE: Starting August 28th, 2025, only a limited subset of images/charts will remain available for free. Backup will be available for some time at the 'Bitnami Legacy' repository. More info at https://github.com/bitnami/containers/issues/83267
+
+Essa decisão afetou diversos usuários que antes utilizavam as Imagens de forma livre.
+
+No caso do WordPress, a imagem que eu utilizava https://hub.docker.com/r/bitnami/wordpress-nginx não está mais disponível de forma gratuita
+* As últimas estão disponíveis em https://hub.docker.com/r/bitnamilegacy/wordpress-nginx
+* Você ainda pode utilizar as outras últimas do https://hub.docker.com/u/bitnamilegacy (mais sem atualização)
+* Nem adianta abrir uma issue relatando o problema causado https://github.com/bitnami/containers/issues/86874
+* Ainda é possível utilizar https://hub.docker.com/r/bitnami/wordpress. Mas até quando?
+
 # GLPI - LTS (Apenas uma POC)
 
 Embora já exista uma **Versão Oficial do GLPI** (https://github.com/glpi-project/glpi) no **Docker Hub** (https://hub.docker.com/r/glpi/glpi), eu acredito que dê pra utilizar outras *Imagens Docker* mais performáticas num `docker-compose.yml` e apenas mapear o código fonte dentro desses containers.
