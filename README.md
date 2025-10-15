@@ -46,3 +46,11 @@ nginx-1     | 2025/10/15 18:00:22 [error] 30#30: *3 directory index of "/var/www
 * Here is working: https://localhost/info.php
 
 * Follow the procedures in https://glpi-install.readthedocs.io/en/latest/install/wizard.html
+
+# Generating Self-Signed Certificates
+
+A single command line with openssl is all it takes to obtain the private key (`nginx.key`) and certificate (`nginx.crt`) files. The files in this repository were generated as follows:
+```
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+```
+* Source: https://ecostack.dev/posts/nginx-self-signed-https-docker-compose/
