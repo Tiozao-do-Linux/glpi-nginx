@@ -54,3 +54,11 @@ A single command line with openssl is all it takes to obtain the private key (`n
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
 ```
 * Source: https://ecostack.dev/posts/nginx-self-signed-https-docker-compose/
+
+# Customizing with Your Preferences
+
+The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.). When in production, remove the `info.php` entry, which serves only to validate that the PHP variables were applied correctly. I chose to uncomment this line in my demo environment, so see https://wordpress.tiozaodolinux.com/info.php
+
+The [custom-nginx.conf](custom-nginx.conf) file contains the basic Nginx server configurations.
+
+The [custom-php.ini](custom-php.ini) file contains the PHP variable configurations.
