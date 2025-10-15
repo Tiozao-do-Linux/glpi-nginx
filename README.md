@@ -16,7 +16,7 @@ cd glpi-nginx
 
 cp env.example .env
 
-docker compose up -d
+docker compose up -d; docker compose logs -f
 ```
 ## What's running
 ```bash
