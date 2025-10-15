@@ -44,6 +44,7 @@ nginx-1     | 2025/10/15 18:00:22 [error] 30#30: *3 directory index of "/var/www
 ```
 
 * Here is working: https://localhost/info.php
+* Here is show an message: https://localhost/public/index.php
 
 * Follow the procedures in https://glpi-install.readthedocs.io/en/latest/install/wizard.html
 
@@ -57,7 +58,7 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out ngin
 
 # Customizing with Your Preferences
 
-The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.). When in production, remove the `info.php` entry, which serves only to validate that the PHP variables were applied correctly. I chose to uncomment this line in my demo environment, so see https://wordpress.tiozaodolinux.com/info.php
+The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.). When in production, remove the `info.php` entry, which serves only to validate that the PHP variables were applied correctly. I chose to uncomment this line in my demo environment, so see https://glpi.tiozaodolinux.com/info.php
 
 The [custom-nginx.conf](custom-nginx.conf) file contains the basic Nginx server configurations.
 
