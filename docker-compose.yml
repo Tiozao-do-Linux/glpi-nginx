@@ -1,53 +1,49 @@
+
 services:
-  phpfpm:
-    image: bitnami/php-fpm
-    container_name: glpi-phpfpm
-    restart: unless-stopped
+
+  database:
+    image: mariadb:latest # Database MariaDB
+    
     environment:
-      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-"512M"}
-      PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-"2048M"}
-      PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-"2048M"}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${DB_DATABASE}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+#    ports:
+#      - '3306:3306'
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./php.ini:/opt/bitnami/php/etc/php.ini:ro
-      - ./glpi_app:/app
-    # ports:
-    #   - "9000:9000"
-  
-  mariadb:
-    image: bitnami/mariadb
-    container_name: glpi-mariadb
+      - ./database:/var/lib/mysql
     restart: unless-stopped
+
+  glpi-fpm:
+    build: .
+    # image: jarbelix/glpi-nginx:fpm      # GLPI with php-fpm and nginx
     environment:
-      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD:-"yes"}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-"Senha_do_MariaDB_root"}
-      MARIADB_USER: ${MARIADB_USER:-"glpi_user"}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-"glpi_password"}
-      MARIADB_DATABASE: ${MARIADB_DATABASE:-"glpi_database"}
+      - GLPI_DB_HOST=database
+      - GLPI_DB_USER=${DB_USER}
+      - GLPI_DB_PASSWORD=${DB_PASSWORD}
+      - GLPI_DB_NAME=${DB_DATABASE}
+#    ports:
+#      - '9000:9000'
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - glpi_db:/opt/mariadb
-    # ports:
-    #   - "3306:3306"
+      - ./glpi:/var/www/html  # Access to GLPI files
+      # - ./plugins:/var/www/html/plugins
+      - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini # PHP Configurations
+      - ./info.php:/var/www/html/info.php # Remove this line to disable info.php in production
+    restart: unless-stopped
+    depends_on:
+      - database
 
   nginx:
-    image: bitnami/nginx
-    container_name: glpi-nginx
-    restart: unless-stopped
-    volumes:
-      # - glpi_nginx:/app
-      - /etc/localtime:/etc/localtime:ro
-      - ./nginx-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/nginx-server-block.conf
-      - ./glpi_app:/app
+    image: nginx:latest # Web server Nginx
     ports:
-      # - "80:80"
-      - "80:8080"
-      # - "443:443"
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
+    volumes:
+      - ./glpi:/var/www/html # Access to GLPI files
+      - ./custom-nginx.conf:/etc/nginx/conf.d/default.conf # Nginx Configurations
+      - ./nginx.crt:/etc/nginx/ssl/nginx.crt
+      - ./nginx.key:/etc/nginx/ssl/nginx.key
+    restart: unless-stopped
     depends_on:
-      - phpfpm
-      - mariadb
-
-volumes:
-  # glpi_app:
-  glpi_db:
-  # glpi_nginx:
+      - glpi-fpm

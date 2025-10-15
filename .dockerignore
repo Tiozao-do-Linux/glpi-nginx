@@ -1,6 +1,8 @@
 .env
 *tgz
-glpi_app/glpi/
+nginx.*
+database/*
+glpi/*
+plugins/*
 Dockerfile
 docker-compose.yml
-docker-compose.override.yml

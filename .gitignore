@@ -1,3 +1,5 @@
 .env
 *tgz
-glpi_app/glpi/
+database/*
+glpi/*
+plugins/*

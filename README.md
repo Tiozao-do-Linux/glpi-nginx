@@ -1,59 +1,48 @@
-# Imagens Bitnami
+# GLPI - (POC - Proof of concept)
 
-Durante 18 anos, as [Imagens Bitnami](https://github.com/bitnami/containers) eram livres para uso sem requerer subscrição/pagamento.
+Although there is already an **Official Version of GLPI** (https://github.com/glpi-project/glpi) on **Docker Hub** (https://hub.docker.com/r/glpi/glpi), I believe it is possible to use other more performant *Docker Images* in a `docker-compose.yml` and just map the source code inside these containers.
 
-Desde 28/Ago/2025 a maioria das imagens requerem subscrição. Se houve algum container rodando com imagens que foram afetadas, a mensagem é mostrada:
-* NOTICE: Starting August 28th, 2025, only a limited subset of images/charts will remain available for free. Backup will be available for some time at the 'Bitnami Legacy' repository. More info at https://github.com/bitnami/containers/issues/83267
+## What do I gain from this?
+- Not having to make another version of the GLPI image available due to a PHP, Nginx, or MariaDB update. Yes, I chose Nginx because it's more performant than Apache.
 
-Essa decisão afetou diversos usuários que antes utilizavam as Imagens de forma livre.
+### If PHP or NGINX has any updates
+- Just do a `docker compose pull` within the directory where docker-compose.yml is located to download the new versions and then a `docker compose up -d` and GLPI will already be using the new versions.
 
-No caso do WordPress, a imagem que eu utilizava https://hub.docker.com/r/bitnami/wordpress-nginx não está mais disponível de forma gratuita
-* As últimas estão disponíveis em https://hub.docker.com/r/bitnamilegacy/wordpress-nginx
-* Você ainda pode utilizar as outras últimas do https://hub.docker.com/u/bitnamilegacy (mais sem atualização)
-* Nem adianta abrir uma issue relatando o problema causado https://github.com/bitnami/containers/issues/86874
-* Ainda é possível utilizar https://hub.docker.com/r/bitnami/wordpress. Mas até quando?
-
-# GLPI - LTS (Apenas uma POC)
-
-Embora já exista uma **Versão Oficial do GLPI** (https://github.com/glpi-project/glpi) no **Docker Hub** (https://hub.docker.com/r/glpi/glpi), eu acredito que dê pra utilizar outras *Imagens Docker* mais performáticas num `docker-compose.yml` e apenas mapear o código fonte dentro desses containers.
-
-## O que ganho com isso?
-- Não ter que disponibilizar outra versão da imagem do GLPI por conta de uma atualização do **php**, **nginx** ou **mariadb**. Sim, escolhi o nginx por ser mais performático que o apache.
-
-### PHP tem alguma atualização
-- Basta fazer um `docker compose pull` dentro do diretório onde encontra-se o docker-compose.yml para baixar a nova versão do php e depois um `docker compose up -d` que o GLPI ja estará utilizando a nova versão do PHP.
-
-# Como obter a última versão LTS do GLPI
-
+# Basic example
 ```bash
-LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
+git clone https://github.com/Tiozao-do-Linux/glpi-nginx.git
 
-curl -# -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
+cd glpi-nginx
 
-tar xzvf glpi-${LATEST}.tgz -C glpi_app/
-```
+cp env.example .env
 
-# Exemplo básico
-```bash
 docker compose up -d
 ```
-## O que estará rodando?
+## What's running
 ```bash
 docker compose ps
-NAME           IMAGE             COMMAND                  SERVICE   CREATED              STATUS              PORTS
-glpi-mariadb   bitnami/mariadb   "/opt/bitnami/script…"   mariadb   About a minute ago   Up About a minute   3306/tcp
-glpi-nginx     bitnami/nginx     "/opt/bitnami/script…"   nginx     About a minute ago   Up About a minute   8443/tcp, 0.0.0.0:80->8080/tcp, [::]:80->8080/tcp
-glpi-phpfpm    bitnami/php-fpm   "php-fpm -F --pid /o…"   phpfpm    About a minute ago   Up About a minute   9000/tcp
+NAME                    IMAGE             COMMAND                  SERVICE    CREATED         STATUS         PORTS
+glpi-nginx-database-1   mariadb:latest    "docker-entrypoint.s…"   database   2 minutes ago   Up 2 minutes   3306/tcp
+glpi-nginx-glpi-1       glpi-nginx-glpi   "/entrypoint.sh php-…"   glpi       2 minutes ago   Up 2 minutes   9000/tcp
+glpi-nginx-nginx-1      nginx:latest      "/docker-entrypoint.…"   nginx      2 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
 ```
-## Tamanho das imagens
+## Size of images used
 ```bash
-docker images | grep -E "^bitnami/(mariadb|nginx|php-fpm).*latest"
-bitnami/php-fpm               latest            9e3e0516c5bd   2 days ago      360MB
-bitnami/nginx                 latest            6362258f3406   2 weeks ago     185MB
-bitnami/mariadb               latest            d3a04feaa812   2 weeks ago     434MB
+docker images | grep -E '(glpi-nginx|mariadb|nginx)'
+glpi-nginx-glpi                latest    18590361002b   54 minutes ago   1.2GB
+nginx                          latest    07ccdb783875   7 days ago       160MB
+mariadb                        latest    dfbea441e6fc   2 months ago     330MB
 ```
 
-## Abrir o browser
+## Wizard Instalation
 
-- URL http://localhost:80/glpi/
+- URL https://localhost
 
+* It's giving an error
+```
+nginx-1     | 2025/10/15 18:00:22 [error] 30#30: *3 directory index of "/var/www/html/" is forbidden, client: 172.16.80.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+```
+
+* Here is working: https://localhost/info.php
+
+* Follow the procedures in https://glpi-install.readthedocs.io/en/latest/install/wizard.html
