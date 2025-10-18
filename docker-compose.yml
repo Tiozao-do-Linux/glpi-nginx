@@ -3,7 +3,6 @@ services:
 
   database:
     image: mariadb:latest # Database MariaDB
-    
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${DB_DATABASE}
@@ -17,7 +16,8 @@ services:
 
   glpi-fpm:
     build: .
-    # image: jarbelix/glpi-nginx:fpm      # GLPI with php-fpm and nginx
+    image: jarbelix/glpi-fpm      # GLPI with php-fpm
+    # image: php:fpm
     environment:
       - GLPI_DB_HOST=database
       - GLPI_DB_USER=${DB_USER}
@@ -26,7 +26,7 @@ services:
 #    ports:
 #      - '9000:9000'
     volumes:
-      - ./glpi:/var/www/html  # Access to GLPI files
+      - glpi:/var/www/html  # Access to GLPI files
       # - ./plugins:/var/www/html/plugins
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini # PHP Configurations
       - ./info.php:/var/www/html/info.php # Remove this line to disable info.php in production
@@ -40,10 +40,13 @@ services:
       - "${HTTP_PORT}:80"
       - "${HTTPS_PORT}:443"
     volumes:
-      - ./glpi:/var/www/html # Access to GLPI files
+      - glpi:/var/www/html # Access to GLPI files
       - ./custom-nginx.conf:/etc/nginx/conf.d/default.conf # Nginx Configurations
       - ./nginx.crt:/etc/nginx/ssl/nginx.crt
       - ./nginx.key:/etc/nginx/ssl/nginx.key
     restart: unless-stopped
     depends_on:
       - glpi-fpm
+
+volumes:
+  glpi:      

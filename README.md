@@ -29,24 +29,26 @@ glpi-nginx-nginx-1      nginx:latest      "/docker-entrypoint.…"   nginx      
 ## Size of images used
 ```bash
 docker images | grep -E '(glpi-nginx|mariadb|nginx)'
-glpi-nginx-glpi                latest    18590361002b   54 minutes ago   1.2GB
-nginx                          latest    07ccdb783875   7 days ago       160MB
-mariadb                        latest    dfbea441e6fc   2 months ago     330MB
+glpi-nginx-glpi-fpm                           latest    c2c4de0f7fa0   6 hours ago         935MB
+nginx                                         latest    07ccdb783875   11 days ago         160MB
+mariadb                                       latest    923218bed02a   2 months ago        337MB
 ```
 
-## Wizard Instalation
-
-- URL https://localhost
-
-* It's giving an error
-```
-nginx-1     | 2025/10/15 18:00:22 [error] 30#30: *3 directory index of "/var/www/html/" is forbidden, client: 172.16.80.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
-```
+## Web Interface
 
 * Here is working: https://localhost/info.php
-* Here is show an message: https://localhost/public/index.php
 
-* Follow the procedures in https://glpi-install.readthedocs.io/en/latest/install/wizard.html
+## Wizard Instalation
+ 
+ * https://localhost - It's giving an error
+
+```
+# The web server seems to be misconfigured.
+
+The web root directory must correspond to the /public directory of GLPI and all the requests should be forwarded to the /public/index.php file.
+
+See the [installation documentation](https://glpi-install.readthedocs.io/en/) for more details.
+```
 
 # Generating Self-Signed Certificates
 
