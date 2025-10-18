@@ -28,7 +28,7 @@ glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx    
 ```
 ## Size of images used
 ```bash
-docker images | grep -E '(glpi-nginx|mariadb|nginx)'
+docker images | grep -E '(glpi-fpm|mariadb|nginx)'
 glpi-nginx-glpi-fpm                           latest    c2c4de0f7fa0   6 hours ago         935MB
 nginx                                         latest    07ccdb783875   11 days ago         160MB
 mariadb                                       latest    923218bed02a   2 months ago        337MB
