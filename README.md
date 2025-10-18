@@ -21,10 +21,10 @@ docker compose up -d; docker compose logs -f
 ## What's running
 ```bash
 docker compose ps
-NAME                    IMAGE             COMMAND                  SERVICE    CREATED         STATUS         PORTS
-glpi-nginx-database-1   mariadb:latest    "docker-entrypoint.s…"   database   2 minutes ago   Up 2 minutes   3306/tcp
-glpi-nginx-glpi-1       glpi-nginx-glpi   "/entrypoint.sh php-…"   glpi       2 minutes ago   Up 2 minutes   9000/tcp
-glpi-nginx-nginx-1      nginx:latest      "/docker-entrypoint.…"   nginx      2 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+NAME                    IMAGE               COMMAND                  SERVICE    CREATED         STATUS         PORTS
+glpi-nginx-database-1   mariadb:latest      "docker-entrypoint.s…"   database   3 seconds ago   Up 2 seconds   3306/tcp
+glpi-nginx-glpi-fpm-1   jarbelix/glpi-fpm   "/entrypoint.sh php-…"   glpi-fpm   3 seconds ago   Up 1 second    9000/tcp
+glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx      3 seconds ago   Up 1 second    0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
 ```
 ## Size of images used
 ```bash
