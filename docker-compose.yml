@@ -29,7 +29,7 @@ services:
       - glpi:/var/www/html  # Access to GLPI files
       # - ./plugins:/var/www/html/plugins
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini # PHP Configurations
-      - ./info.php:/var/www/html/info.php # Remove this line to disable info.php in production
+      - ./info.php:/var/www/html/glpi/public/info.php # Remove this line to disable info.php in production
     restart: unless-stopped
     depends_on:
       - database

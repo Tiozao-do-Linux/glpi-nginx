@@ -11,30 +11,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # More about heredocs in Dockerfiles: https://www.docker.com/blog/introduction-to-heredocs-in-dockerfiles/
 
-# # Install necessary packages
-# RUN <<EOF
-# # Update packages
-# apt-get update
-# apt-get upgrade -y
-
-# # Install PHP nodules
-# # To enable PHP modules in a php:fpm Docker image, you typically use a custom Dockerfile to extend the base image.
-# # This involves installing necessary system dependencies and then using the docker-php-ext-install or docker-php-ext-enable commands provided by the official PHP Docker images.
-# apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev libxml2-dev libldap2-dev libzip-dev libicu-dev libmariadb-dev
-
-# # Install PHP extensions
-# docker-php-ext-configure gd --with-freetype --with-jpeg
-# docker-php-ext-install -j$(nproc) gd intl xml opcache ldap zip mysqli pdo pdo_mysql exif
-
-# # Extra packages for convenience
-# # apt-get install -y htop tree iputils-ping curl jq net-tools
-
-# # Clean
-# apt-get remove -y --purge libpng-dev libjpeg-dev libfreetype6-dev libxml2-dev libldap2-dev libzip-dev libicu-dev libmariadb-dev
-# apt-get clean
-# rm -rf /var/lib/apt/lists/*
-# EOF
-
 # Install extra packages for convenience
 RUN <<EOF
 # Update packages
@@ -54,27 +30,30 @@ RUN <<EOF
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
 curl -# -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
-# GLPI upstream tarballs include ./glpi/ so remove it with --strip-components=1
-tar xzvf glpi-${LATEST}.tgz --no-same-owner --strip-components=1
+## GLPI upstream tarballs include ./glpi/ so remove it with --strip-components=1
+## tar xzvf glpi-${LATEST}.tgz --no-same-owner --strip-components=1
+
+# Extract GLPI
+tar xzvf glpi-${LATEST}.tgz --no-same-owner
 
 # Clean
 rm glpi-${LATEST}.tgz
 
 # Adjust permissions (files and config directory)
-chown -R www-data:www-data /var/www/html/files /var/www/html/config
+chown -R www-data:www-data /var/www/html/glpi/files /var/www/html/glpi/config
 EOF
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
-
-# What user should run the app
-#USER www-data
 
 # Defines volumes to be supported
 VOLUME /var/www/html
 
 # Expose the port of php-fpm
 EXPOSE 9000
+
+# What user should run the app
+USER www-data
 
 # Check a container's health on startup.
 # HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD pgrep php-fpm >/dev/null 2>&1 || exit 1

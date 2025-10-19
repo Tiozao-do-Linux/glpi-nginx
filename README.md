@@ -29,10 +29,10 @@ glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx    
 ## Size of images used
 ```bash
 docker images | grep -E '(REPOSITORY|glpi-fpm|mariadb|nginx)'
-REPOSITORY                                    TAG       IMAGE ID       CREATED         SIZE
-jarbelix/glpi-fpm                             latest    75617b98fe17   About an hour ago   876MB
-nginx                                         latest    07ccdb783875   11 days ago         160MB
-mariadb                                       latest    dfbea441e6fc   2 months ago        330MB
+REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
+jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   876MB
+nginx               latest    07ccdb783875   11 days ago     160MB
+mariadb             latest    dfbea441e6fc   2 months ago    330MB
 ```
 
 ## Web Interface
@@ -41,15 +41,24 @@ mariadb                                       latest    dfbea441e6fc   2 months 
 
 ## Wizard Instalation
  
- * https://localhost - It's giving an error
+* https://localhost - It's giving an error
 
 ```
-# The web server seems to be misconfigured.
+GLPI setup
 
-The web root directory must correspond to the /public directory of GLPI and all the requests should be forwarded to the /public/index.php file.
+The GLPI database must be configured and installed.
 
-See the [installation documentation](https://glpi-install.readthedocs.io/en/) for more details.
+[Go to install page](https://localhost/install/install.php)
+
 ```
+* https://localhost/install/install.php - say:
+```
+File not found.
+```
+
+* **Where am I going wrong?**
+
+-----
 
 # Generating Self-Signed Certificates
 
