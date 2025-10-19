@@ -63,6 +63,7 @@ File not found.
 * https://glpi.tiozaodolinux.com/
 * https://glpi.tiozaodolinux.com/info.php
 * https://glpi.tiozaodolinux.com/install/install.php
+* https://glpi.tiozaodolinux.com/nginx_status
 * **Where am I going wrong?**
 
 -----
