@@ -58,6 +58,11 @@ The GLPI database must be configured and installed.
 File not found.
 ```
 
+## My POC environment
+
+* https://glpi.tiozaodolinux.com/
+* https://glpi.tiozaodolinux.com/info.php
+* https://glpi.tiozaodolinux.com/install/install.php
 * **Where am I going wrong?**
 
 -----
