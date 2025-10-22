@@ -38,9 +38,15 @@ tar xzvf glpi-${LATEST}.tgz --no-same-owner
 
 # Clean
 rm glpi-${LATEST}.tgz
+EOF
 
-# Adjust permissions (files and config directory)
-chown -R www-data:www-data /var/www/html/glpi/files /var/www/html/glpi/config
+# Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
+RUN <<EOF
+chown -R www-data:www-data glpi/files glpi/config
+
+# Create custom directories for config and files outside web root
+mkdir -p /etc/glpi /var/lib/glpi /var/log/glpi
+chown -R www-data:www-data /etc/glpi /var/lib/glpi /var/log/glpi
 EOF
 
 # Copy entrypoint
@@ -53,7 +59,7 @@ VOLUME /var/www/html
 EXPOSE 9000
 
 # What user should run the app
-USER www-data
+# USER www-data
 
 # Check a container's health on startup.
 # HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD pgrep php-fpm >/dev/null 2>&1 || exit 1

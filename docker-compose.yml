@@ -27,7 +27,7 @@ services:
 #      - '9000:9000'
     volumes:
       - glpi:/var/www/html  # Access to GLPI files
-      # - ./plugins:/var/www/html/plugins
+      - ./downstream.php:/var/www/html/glpi/inc/downstream.php # Custom downstream.php to change storage paths
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini # PHP Configurations
       - ./info.php:/var/www/html/glpi/public/info.php # Remove this line to disable info.php in production
     restart: unless-stopped
