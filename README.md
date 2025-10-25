@@ -32,7 +32,7 @@ glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx    
 ```bash
 docker images | grep -E '(REPOSITORY|glpi-fpm|mariadb|nginx)'
 REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
-jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   876MB
+jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   744MB
 nginx               latest    07ccdb783875   11 days ago     160MB
 mariadb             latest    dfbea441e6fc   2 months ago    330MB
 ```
