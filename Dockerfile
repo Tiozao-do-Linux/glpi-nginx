@@ -18,6 +18,7 @@ dnf -y upgrade --refresh
 
 # Necessary packages
 dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
+dnf -y install php-{opcache,sodium}
 
 # Extra packages
 dnf -y install epel-release
@@ -48,12 +49,13 @@ tar xzvf glpi-${LATEST}.tgz --no-same-owner
 
 # Clean
 rm glpi-${LATEST}.tgz
+
 EOF
 
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
 RUN <<EOF
 
-chown -R apache:apache glpi/files glpi/config
+chown -R apache:apache glpi/files glpi/config glpi/marketplace
 
 # # Create custom directories for config and files outside web root
 # mkdir -p /etc/glpi /var/lib/glpi /var/log/glpi
