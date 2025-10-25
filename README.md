@@ -110,7 +110,6 @@ mariadb             latest    dfbea441e6fc   2 months ago    330MB
 * https://glpi.tiozaodolinux.com/info.php
 * https://glpi.tiozaodolinux.com/status/nginx
 * https://glpi.tiozaodolinux.com/status/fpm
-* **Where am I going wrong?**
 
 -----
 
