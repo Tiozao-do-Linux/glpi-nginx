@@ -6,17 +6,17 @@ echo "[$_DATE_TIME] Executing entrypoint script"
 
 # First arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
-    set -- php-fpm8.4 "$@"
+    set -- php-fpm"$@"
 fi
 
 echo "-------------------------------------"
 echo "First argument: $1"
 echo "-------------------------------------"
-php-fpm8.4 -v
+php-fpm -v
 echo "-------------------------------------"
-php-fpm8.4 -t
+php-fpm -t
 echo "-------------------------------------"
-php-fpm8.4 -m
+php-fpm -m
 echo "-------------------------------------"
 echo "Starting php-fpm with the following command:"
 echo "exec $@"

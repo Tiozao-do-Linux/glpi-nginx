@@ -30,7 +30,7 @@ if (file_exists(GLPI_CONFIG_DIR . '/local_define.php')) {
 // GLPI_VAR_DIR permits to change the storage path of all the GLPI files, but you can adapt the storage path for each kind of files
 
 // runtime data
-define('GLPI_VAR_DIR',        '/var/www/html/glpi/files');
+define('GLPI_VAR_DIR',        '/var/www/glpi/files');
 
 define('GLPI_DOC_DIR',        GLPI_VAR_DIR);                  // Path for documents storage
 define('GLPI_CACHE_DIR',      GLPI_VAR_DIR . '/_cache');      // Path for cache storage
