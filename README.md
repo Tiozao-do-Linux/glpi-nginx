@@ -37,33 +37,79 @@ nginx               latest    07ccdb783875   11 days ago     160MB
 mariadb             latest    dfbea441e6fc   2 months ago    330MB
 ```
 
-## Web Interface
+# Wizard Instalation
 
-* Here is working: https://localhost/info.php
+## GLPI Setup
 
-## Wizard Instalation
- 
-* https://localhost - It's giving an error
+![Tela-01](screenshots/glpi-page-01.png)
 
-```
-GLPI setup
+## Select your language
 
-The GLPI database must be configured and installed.
+![Tela-02](screenshots/glpi-page-02.png)
 
-[Go to install page](https://localhost/install/install.php)
+## License
 
-```
-* https://localhost/install/install.php - say:
-```
-File not found.
-```
+![Tela-03](screenshots/glpi-page-03.png)
+
+## Install or Upgrade GLPI
+
+![Tela-04](screenshots/glpi-page-04.png)
+
+## Checking your environment #1
+
+![Tela-05](screenshots/glpi-page-05.png)
+
+## Cheking your environment #2
+
+![Tela-06](screenshots/glpi-page-06.png)
+
+## Database conection setup
+
+![Tela-07](screenshots/glpi-page-07.png)
+
+## Test database connection
+
+![Tela-08](screenshots/glpi-page-08.png)
+
+## Initialize database #1
+
+![Tela-09](screenshots/glpi-page-09.png)
+
+## Initialize database #2
+
+![Tela-10](screenshots/glpi-page-10.png)
+
+## Collect data
+
+![Tela-11](screenshots/glpi-page-11.png)
+
+## One last thing before starting GLPI
+
+![Tela-12](screenshots/glpi-page-12.png)
+
+## The instalation is finished
+
+![Tela-13](screenshots/glpi-page-13.png)
+
+## Login to your account
+
+![Tela-14](screenshots/glpi-page-14.png)
+
+## Your Dasboard
+
+![Tela-15](screenshots/glpi-page-15.png)
+
+## Checking Version of GLPI
+
+![Tela-16](screenshots/glpi-page-16.png)
+
 
 ## My POC environment
 
 * https://glpi.tiozaodolinux.com/
 * https://glpi.tiozaodolinux.com/info.php
-* https://glpi.tiozaodolinux.com/install/install.php
-* https://glpi.tiozaodolinux.com/nginx_status
+* https://glpi.tiozaodolinux.com/status/nginx
+* https://glpi.tiozaodolinux.com/status/fpm
 * **Where am I going wrong?**
 
 -----
@@ -78,8 +124,12 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out ngin
 
 # Customizing with Your Preferences
 
-The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.). When in production, remove the `info.php` entry, which serves only to validate that the PHP variables were applied correctly. I chose to uncomment this line in my demo environment, so see https://glpi.tiozaodolinux.com/info.php
+The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.).
 
 The [custom-nginx.conf](custom-nginx.conf) file contains the basic Nginx server configurations.
 
 The [custom-php.ini](custom-php.ini) file contains the PHP variable configurations.
+
+## Important
+
+In **production** mode, adjust the locations in `custom-nginx.conf` to allow only your networks. Comment out the 'allow all' line and uncomment the line corresponding to your network.
