@@ -13,21 +13,29 @@ LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.co
 # Install necessary packages
 RUN <<EOF
 
-# Update packages
-dnf -y upgrade --refresh
-
-# Necessary packages
-dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
-dnf -y install php-{opcache,sodium}
-
 # Extra packages
 dnf -y install epel-release
 dnf -y install net-tools nmap htop
 
+# # Update packages
+# dnf -y upgrade --refresh
+
+# Necessary packages
+dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
+
+dnf -y install php-{opcache,sodium}
+
 # Adjust PHP-FPM configuration
 sed -i 's|^pid =.*|pid = /var/run/php-fpm.pid|' /etc/php-fpm.conf
 sed -i 's|^listen =.*|listen = 9000|' /etc/php-fpm.d/www.conf
-sed -i 's|^listen.allowed_clients =.*|;listen.allowed_clients = 127.0.0.0/8|' /etc/php-fpm.d/www.conf
+sed -i 's|^user =.*|user = nginx|' /etc/php-fpm.d/www.conf
+sed -i 's|^group =.*|group = nginx|' /etc/php-fpm.d/www.conf
+sed -i 's|^listen.allowed_clients =.*|;listen.allowed_clients =|' /etc/php-fpm.d/www.conf
+sed -i 's|^;pm.status_path =.*|pm.status_path = /status/fpm|' /etc/php-fpm.d/www.conf
+
+# The TLS_REQCERT never setting in the context of PHP and LDAP refers to disabling the server
+# certificate validation when establishing a TLS (Transport Layer Security) connection to an LDAP server.
+echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
 
 # Clean up
 dnf clean all
@@ -55,7 +63,7 @@ EOF
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
 RUN <<EOF
 
-chown -R apache:apache glpi/files glpi/config glpi/marketplace
+chown -R nginx:nginx glpi/files glpi/config glpi/marketplace
 
 # # Create custom directories for config and files outside web root
 # mkdir -p /etc/glpi /var/lib/glpi /var/log/glpi
