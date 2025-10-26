@@ -39,6 +39,8 @@ mariadb             latest    dfbea441e6fc   2 months ago    330MB
 
 # Wizard Instalation
 
+* Open a browser with the URL https://localhost
+
 ## GLPI Setup
 
 ![Tela-01](screenshots/glpi-page-01.png)
