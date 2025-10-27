@@ -20,6 +20,7 @@ docker compose build --no-cache
 
 docker compose up -d; docker compose logs -f
 ```
+
 ## What's running
 ```bash
 docker compose ps
@@ -28,13 +29,24 @@ glpi-nginx-database-1   mariadb:latest      "docker-entrypoint.s…"   database 
 glpi-nginx-glpi-fpm-1   jarbelix/glpi-fpm   "/entrypoint.sh php-…"   glpi-fpm   3 seconds ago   Up 1 second    9000/tcp
 glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx      3 seconds ago   Up 1 second    0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
 ```
+
 ## Size of images used
 ```bash
 docker images | grep -E '(REPOSITORY|glpi-fpm|mariadb|nginx)'
 REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
-jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   744MB
-nginx               latest    07ccdb783875   11 days ago     160MB
+jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   760MB
+nginx               latest    07ccdb783875   11 days ago     152MB
 mariadb             latest    dfbea441e6fc   2 months ago    330MB
+```
+
+## List glpi related volumes
+```bash
+docker volume ls | grep glpi_
+```
+
+## Accessing the container shell
+```bash
+docker exec -it glpi-nginx-glpi-fpm-1 bash
 ```
 
 # Wizard Instalation
