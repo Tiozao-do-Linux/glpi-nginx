@@ -18,11 +18,12 @@ dnf -y install epel-release
 dnf -y install net-tools nmap htop
 
 # # Update packages
-# dnf -y upgrade --refresh
+dnf -y upgrade --refresh
 
 # Necessary packages
 dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
 
+# Additional PHP extensions
 dnf -y install php-{opcache,sodium}
 
 # Adjust PHP-FPM configuration
@@ -58,16 +59,8 @@ tar xzvf glpi-${LATEST}.tgz --no-same-owner
 # Clean
 rm glpi-${LATEST}.tgz
 
-EOF
-
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
-RUN <<EOF
-
 chown -R nginx:nginx glpi/files glpi/config glpi/marketplace
-
-# # Create custom directories for config and files outside web root
-# mkdir -p /etc/glpi /var/lib/glpi /var/log/glpi
-# chown -R www-data:www-data /etc/glpi /var/lib/glpi /var/log/glpi
 
 EOF
 
@@ -79,9 +72,6 @@ VOLUME /var/www/html/glpi
 
 # Expose the port of php-fpm
 EXPOSE 9000
-
-# What user should run the app
-# USER www-data
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD ["php-fpm", "-F"]
