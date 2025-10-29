@@ -5,7 +5,7 @@ Although there is already an **Official Version of GLPI** (https://github.com/gl
 ## What do I gain from this?
 - Not having to make another version of the GLPI image available due to a PHP, Nginx, or MariaDB update. Yes, I chose Nginx because it's more performant than Apache.
 
-### If PHP or NGINX has any updates
+### If PHP or NGINX or MariaDB has any updates
 - Just do a `docker compose pull` within the directory where docker-compose.yml is located to download the new versions and then a `docker compose up -d` and GLPI will already be using the new versions.
 
 # Basic example
