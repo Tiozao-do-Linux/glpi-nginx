@@ -16,8 +16,6 @@ cd glpi-nginx
 
 cp env.example .env
 
-docker compose build --no-cache
-
 docker compose up -d; docker compose logs -f
 ```
 
@@ -116,7 +114,6 @@ docker exec -it glpi-nginx-glpi-fpm-1 bash
 ## Checking Version of GLPI
 
 ![Tela-16](screenshots/glpi-page-16.png)
-
 
 ## My POC environment
 
