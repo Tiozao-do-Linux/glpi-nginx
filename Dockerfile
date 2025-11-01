@@ -60,7 +60,7 @@ tar xzvf glpi-${LATEST}.tgz --no-same-owner
 rm glpi-${LATEST}.tgz
 
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
-chown -R nginx:nginx glpi/files glpi/config glpi/marketplace
+chown -R nginx:nginx glpi/files glpi/config glpi/marketplace glpi/pluginsplugins
 
 EOF
 
