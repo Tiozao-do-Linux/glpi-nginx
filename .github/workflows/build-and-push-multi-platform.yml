@@ -36,6 +36,12 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Get latest GLPI version
+        id: get_latest
+        run: |
+          LATEST=$(curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }')
+          echo "LATEST=$LATEST" >> $GITHUB_OUTPUT
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -46,6 +52,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          tags: jarbelix/glpi-fpm:latest
+          tags: jarbelix/glpi-fpm:${{ steps.get_latest.outputs.LATEST }},jarbelix/glpi-fpm:latest
           platforms: linux/amd64, linux/arm64
           push: true
