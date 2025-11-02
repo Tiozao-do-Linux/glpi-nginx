@@ -32,7 +32,7 @@ glpi-nginx-nginx-1      nginx:latest        "/docker-entrypoint.…"   nginx    
 ```bash
 docker images | grep -E '(REPOSITORY|glpi-fpm|mariadb|nginx)'
 REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
-jarbelix/glpi-fpm   latest    0d5936e99185   5 seconds ago   760MB
+jarbelix/glpi-fpm   latest    60131ae3c08d   5 seconds ago   717MB
 nginx               latest    07ccdb783875   11 days ago     152MB
 mariadb             latest    dfbea441e6fc   2 months ago    330MB
 ```
@@ -46,6 +46,10 @@ docker volume ls | grep glpi_
 ```bash
 docker exec -it glpi-nginx-glpi-fpm-1 bash
 ```
+
+## My glpi-fpm images in hub.docker.com
+
+* https://hub.docker.com/r/jarbelix/glpi-fpm/tags
 
 # Wizard Instalation
 
