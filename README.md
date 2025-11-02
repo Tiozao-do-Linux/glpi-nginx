@@ -3,12 +3,15 @@
 Although there is already an **Official Version of GLPI** (https://github.com/glpi-project/glpi) on **Docker Hub** (https://hub.docker.com/r/glpi/glpi), I believe it is possible to use other more performant *Docker Images* in a `docker-compose.yml` and just map the source code inside these containers.
 
 ## What do I gain from this?
-- Not having to make another version of the GLPI image available due to a PHP, Nginx, or MariaDB update. Yes, I chose Nginx because it's more performant than Apache.
+- The [docker-compose.yml](docker-compose.yml) file is very simple. Take a look.
+- If NGINX or MariaDB receives an update, it will not be necessary to rebuild the glpi-fpm image.
+- If PHP or GLPI itself receives an update, it will be necessary to create a new glpi-fpm image to reflect the updates.
+- I chose Nginx because it's more performant than Apache.
 
-### If PHP or NGINX or MariaDB has any updates
-- Just do a `docker compose pull` within the directory where docker-compose.yml is located to download the new versions and then a `docker compose up -d` and GLPI will already be using the new versions.
+### How to keep everything up to date
+- Just do a `docker compose pull` within the directory where docker-compose.yml is located to download the new versions and then a `docker compose up -d` and the new versions will already be in use.
 
-# Basic example
+# Simple and straightforward
 ```bash
 git clone https://github.com/Tiozao-do-Linux/glpi-nginx.git
 
