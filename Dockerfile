@@ -13,12 +13,19 @@ LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.co
 # Install necessary packages
 RUN <<EOF
 
-# Extra packages
-dnf -y install epel-release
-dnf -y install net-tools nmap htop
+# Configure PHP repository Remi - https://rpms.remirepo.net/
+dnf -y install 'dnf-command(config-manager)'
+dnf -y config-manager --set-enabled crb
+dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+dnf -y install https://rpms.remirepo.net/enterprise/remi-release-10.rpm
+dnf -y module switch-to php:remi-8.3
+
+# # Extra packages
+# dnf -y install epel-release
+# dnf -y install net-tools nmap htop
 
 # # Update packages
-dnf -y upgrade --refresh
+# dnf -y upgrade
 
 # Necessary packages
 dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
