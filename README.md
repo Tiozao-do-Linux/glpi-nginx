@@ -6,7 +6,9 @@ Although there is already an **Official Version of GLPI** (https://github.com/gl
 - The [docker-compose.yml](docker-compose.yml) file is very simple. Take a look.
 - If NGINX or MariaDB receives an update, it will not be necessary to rebuild the glpi-fpm image.
 - If PHP or GLPI itself receives an update, it will be necessary to create a new glpi-fpm image to reflect the updates.
-- I chose Nginx because it's more performant than Apache.
+- The jarbelix/glpi-fpm image size is SMALLER than glpi/glpi.
+- The jarbelix/glpi-fpm image supports both amd64 and arm64 architectures, while the glpi/glpi image only supports amd64.
+- And yes, I chose Nginx because it's more performant than Apache.
 
 ### How to keep everything up to date
 - Just do a `docker compose pull` within the directory where docker-compose.yml is located to download the new versions and then a `docker compose up -d` and the new versions will already be in use.
