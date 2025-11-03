@@ -1,5 +1,4 @@
-# FROM php:fpm
-FROM almalinux:10
+FROM almalinux:9
 
 # Add metadata to an image.
 LABEL description="GLPI Docker Container with php-fpm"
@@ -16,9 +15,9 @@ RUN <<EOF
 # Configure PHP repository Remi - https://rpms.remirepo.net/
 dnf -y install 'dnf-command(config-manager)'
 dnf -y config-manager --set-enabled crb
-dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
-dnf -y install https://rpms.remirepo.net/enterprise/remi-release-10.rpm
-dnf -y module switch-to php:remi-8.3
+dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+dnf -y module switch-to php:remi-8.4
 
 # # Extra packages
 # dnf -y install epel-release
