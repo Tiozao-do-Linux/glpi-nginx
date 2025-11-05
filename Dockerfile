@@ -23,8 +23,8 @@ dnf -y module switch-to php:remi-8.4
 # dnf -y install epel-release
 # dnf -y install net-tools nmap htop
 
-# # Update packages
-# dnf -y upgrade
+# Update packages
+dnf -y upgrade
 
 # Necessary packages
 dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
