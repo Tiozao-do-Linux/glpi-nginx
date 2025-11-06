@@ -2,9 +2,10 @@
 set -e
 
 function echo_line {
-    echo "________________________________________________________________________________"
-    echo "$@"
-    echo "================================================================================"
+    echo ''
+    echo '/------------------------------------------------------------------------------\'
+    echo "| $@"
+    echo '\------------------------------------------------------------------------------/'
 }
 
 cat << '_EOF'
@@ -19,7 +20,7 @@ cat << '_EOF'
 _EOF
 
 if ! [ -f "/etc/php-fpm.conf" -a -f "/etc/php-fpm.d/www.conf" ]; then
-    echo_line "PHP-FPM configuration files not found!"
+    echo_line "PHP-FPM configuration files (/etc/php-fpm.conf or /etc/php-fpm.d/www.conf) not found!"
     exit 1
 fi
 
@@ -34,7 +35,7 @@ FORMATTED=$(php-fpm -m | awk '/^\[/{if(NR>1)print prev; prev=$0; next}{gsub(/^\s
 echo "$FORMATTED"
 
 _DATE_TIME=`date`
-echo_line "PHP-FPM Starting at ${_DATE_TIME}..."
+echo_line "PHP-FPM Starting ($@) at ${_DATE_TIME}..."
 
 # Run php-fpm
 exec "$@"
