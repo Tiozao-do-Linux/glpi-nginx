@@ -44,12 +44,17 @@ mariadb             latest    dfbea441e6fc   2 months ago    330MB
 
 ## List glpi related volumes
 ```bash
-docker volume ls | grep glpi_
+docker volume ls | grep _glpi
 ```
 
 ## Accessing the container shell
 ```bash
 docker exec -it glpi-nginx-glpi-fpm-1 bash
+```
+
+## View only glpi-fpm logs online
+```
+docker compose logs glpi-fpm -f --tail 50
 ```
 
 ## My glpi-fpm images in hub.docker.com
