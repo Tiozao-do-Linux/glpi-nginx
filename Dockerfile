@@ -74,7 +74,7 @@ EOF
 COPY entrypoint.sh /entrypoint.sh
 
 # Defines volumes to be supported
-VOLUME /var/www/html/glpi
+VOLUME ["/var/www/html/glpi", "/var/www/html/glpi/files", "/var/www/html/glpi/config", "/var/www/html/glpi/marketplace", "/var/www/html/glpi/plugins"]
 
 # Expose the port of php-fpm
 EXPOSE 9000

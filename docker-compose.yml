@@ -8,8 +8,8 @@ services:
       - MARIADB_DATABASE=${DB_DATABASE}
       - MARIADB_USER=${DB_USER}
       - MARIADB_PASSWORD=${DB_PASSWORD}
-#    ports:
-#      - '3306:3306'
+    ports:
+      - "${BD_PORT}:3306"
     volumes:
       - glpi_database:/var/lib/mysql
     restart: unless-stopped
@@ -18,16 +18,20 @@ services:
     build: .
     image: jarbelix/glpi-fpm      # GLPI with php-fpm
     environment:
-      - GLPI_DB_HOST=database
+      - GLPI_DB_HOST=${DB_HOST}
       - GLPI_DB_USER=${DB_USER}
       - GLPI_DB_PASSWORD=${DB_PASSWORD}
       - GLPI_DB_NAME=${DB_DATABASE}
-#    ports:
-#      - '9000:9000'
+    ports:
+      - "${FPM_PORT}:9000"
     volumes:
       - glpi_php:/var/www/html/glpi  # Access to GLPI files
       - ./custom-php.ini:/etc/php.d/custom-php.ini # PHP Configurations
-      - ./info.php:/var/www/html/glpi/public/info.php # Remove this line to disable info.php in production
+        #      - ./info.php:/var/www/html/glpi/public/info.php # Remove this line to disable info.php in production
+      - glpi-config:/var/www/html/glpi/config
+      - glpi-files:/var/www/html/glpi/files
+      - glpi-marketplace:/var/www/html/glpi/marketplace
+      - glpi-plugins:/var/www/html/glpi/plugins
     restart: unless-stopped
     depends_on:
       - database
@@ -49,3 +53,7 @@ services:
 volumes:
   glpi_php:
   glpi_database:
+  glpi-config:
+  glpi-files:
+  glpi-marketplace:
+  glpi-plugins:
