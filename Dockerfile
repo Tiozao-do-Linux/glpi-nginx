@@ -19,9 +19,9 @@ dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarc
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 dnf -y module switch-to php:remi-8.4
 
-# # Extra packages
-# dnf -y install epel-release
-# dnf -y install net-tools nmap htop
+# Extra packages
+dnf -y install epel-release
+dnf -y install net-tools nmap htop
 
 # Update packages
 dnf -y upgrade
