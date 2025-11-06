@@ -57,6 +57,41 @@ docker exec -it glpi-nginx-glpi-fpm-1 bash
 docker compose logs glpi-fpm -f --tail 50
 ```
 
+```
+glpi-fpm-1  |  ____________________________________________________________________________
+glpi-fpm-1  | /\                                                                           \
+glpi-fpm-1  | \_|         PHP-FPM - https://github.com/Tiozao-do-Linux/glpi-nginx          |
+glpi-fpm-1  |   |                                                                          |
+glpi-fpm-1  |   |         with files /etc/php-fpm.conf and /etc/php-fpm.d/www.conf         |
+glpi-fpm-1  |   |   _______________________________________________________________________|_
+glpi-fpm-1  |    \_/_________________________________________________________________________/
+glpi-fpm-1  | 
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | Show PHP-FPM Version
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | PHP 8.4.14 (fpm-fcgi) (built: Oct 21 2025 19:23:55) (NTS gcc aarch64)
+glpi-fpm-1  | Copyright (c) The PHP Group
+glpi-fpm-1  | Built by Remi's RPM repository <https://rpms.remirepo.net/> #StandWithUkraine
+glpi-fpm-1  | Zend Engine v4.4.14, Copyright (c) Zend Technologies
+glpi-fpm-1  |     with Zend OPcache v8.4.14, Copyright (c), by Zend Technologies
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | PHP-FPM Configuration Test
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | [06-Nov-2025 21:49:10] NOTICE: configuration file /etc/php-fpm.conf test is successful
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | PHP-FPM Loaded Modules
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | [PHP Modules] apcu bcmath bz2 calendar cgi-fcgi Core ctype curl date dom exif fileinfo filter ftp gd gettext hash iconv intl json ldap libxml mbstring mysqli mysqlnd openssl pcre PDO pdo_mysql pdo_sqlite Phar random Reflection session SimpleXML snmp soap sockets sodium SPL sqlite3 standard tokenizer xml xmlreader xmlwriter xsl Zend OPcache zip zlib
+glpi-fpm-1  | [Zend Modules] Zend OPcache
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | PHP-FPM Starting (php-fpm -F) at Thu Nov  6 21:49:10 UTC 2025...
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+```
+
 ## My glpi-fpm images in hub.docker.com
 
 * https://hub.docker.com/r/jarbelix/glpi-fpm/tags
