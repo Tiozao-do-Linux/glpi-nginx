@@ -35,22 +35,40 @@ FORMATTED=$(php -m | awk '/^\[/{if(NR>1)print prev; prev=$0; next}{gsub(/^\s+|\s
 echo "$FORMATTED"
 
 echo_line "Check system requirements to run GLPI"
-php glpi/bin/console system:check_requirements
+if php glpi/bin/console system:check_requirements
+then
+    echo_line "Check if GLPI is already installed"
+    if php glpi/bin/console database:check_schema_integrity
+    then
+        echo_line "GLPI is already installed"
+    else
+        echo_line "Install GLPI Automatically is disabled by default."
+        echo_line "You can enable it by setting the GLPI_INSTALL environment variable to true."
 
-echo_line "Check GLPI database schema integrity"
-php glpi/bin/console database:check_schema_integrity
+        # echo_line "Is Update?"
+        # php glpi/bin/console db:update
 
-# echo_line "Install GLPI if database schema is not valid"
-# php glpi/bin/console database:check_schema_integrity || \
-# php glpi/bin/console db:install \
-# --default-language="$GLPI_LANG" \
-# --db-host="$GLPI_DB_HOST" \
-# --db-port="$GLPI_DB_PORT" \
-# --db-name="$GLPI_DB_NAME" \
-# --db-user="$GLPI_DB_USER" \
-# --db-password="$GLPI_DB_PASSWORD" \
-# --no-interaction \
-# --reconfigure
+        # echo_line "Enable maintenance mode before installation"
+        # php glpi/bin/console maintenance:enable
+     
+        # php glpi/bin/console db:install \
+        # --default-language="$GLPI_LANG" \
+        # --db-host="$GLPI_DB_HOST" \
+        # --db-port="$GLPI_DB_PORT" \
+        # --db-name="$GLPI_DB_NAME" \
+        # --db-user="$GLPI_DB_USER" \
+        # --db-password="$GLPI_DB_PASSWORD" \
+        # --no-interaction \
+        # --reconfigure
+
+        # echo_line "Disable maintenance mode after installation"
+        # php glpi/bin/console maintenance:disable
+    fi
+else
+    echo_line "Requirements not met!";
+    exit 1
+fi
+
 
 _DATE_TIME=`date`
 echo_line "PHP-FPM Starting ($@) at ${_DATE_TIME}..."
