@@ -9,7 +9,7 @@ services:
       - MARIADB_USER=${DB_USER}
       - MARIADB_PASSWORD=${DB_PASSWORD}
     ports:
-      - "${BD_PORT}:3306"
+      - "${DB_PORT}:3306"
     volumes:
       - glpi_database:/var/lib/mysql
     restart: unless-stopped
