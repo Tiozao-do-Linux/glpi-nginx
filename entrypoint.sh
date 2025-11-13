@@ -46,11 +46,11 @@ then
         echo_line "You can enable it by setting the GLPI_INSTALL environment variable to true."
 
         # echo_line "Is Update?"
-        # php glpi/bin/console db:update
+        # php glpi/bin/console database:update
 
-        # echo_line "Enable maintenance mode before installation"
+        # echo_line "Enable maintenance mode"
         # php glpi/bin/console maintenance:enable
-     
+
         # php glpi/bin/console db:install \
         # --default-language="$GLPI_LANG" \
         # --db-host="$GLPI_DB_HOST" \
@@ -61,7 +61,7 @@ then
         # --no-interaction \
         # --reconfigure
 
-        # echo_line "Disable maintenance mode after installation"
+        # echo_line "Disable maintenance mode"
         # php glpi/bin/console maintenance:disable
     fi
 else
