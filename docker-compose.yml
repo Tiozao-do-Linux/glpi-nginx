@@ -17,11 +17,14 @@ services:
   glpi-fpm:
     build: .
     image: jarbelix/glpi-fpm      # GLPI with php-fpm
+    hostname: glpi-fpm
     environment:
+      - GLPI_LANG=${GLPI_LANG}
       - GLPI_DB_HOST=${DB_HOST}
       - GLPI_DB_USER=${DB_USER}
       - GLPI_DB_PASSWORD=${DB_PASSWORD}
       - GLPI_DB_NAME=${DB_DATABASE}
+      - GLPI_DB_PORT=${DB_PORT}
     ports:
       - "${FPM_PORT}:9000"
     volumes:

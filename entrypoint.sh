@@ -24,15 +24,33 @@ if ! [ -f "/etc/php-fpm.conf" -a -f "/etc/php-fpm.d/www.conf" ]; then
     exit 1
 fi
 
-echo_line "Show PHP-FPM Version"
-php-fpm -v
+echo_line "Show PHP Version"
+php -v
 
 echo_line "PHP-FPM Configuration Test"
 php-fpm -t
 
-echo_line "PHP-FPM Loaded Modules"
-FORMATTED=$(php-fpm -m | awk '/^\[/{if(NR>1)print prev; prev=$0; next}{gsub(/^\s+|\s+$/,""); if($0) prev=prev" "$0} END{print prev}')
+echo_line "PHP Loaded Modules"
+FORMATTED=$(php -m | awk '/^\[/{if(NR>1)print prev; prev=$0; next}{gsub(/^\s+|\s+$/,""); if($0) prev=prev" "$0} END{print prev}')
 echo "$FORMATTED"
+
+echo_line "Check system requirements to run GLPI"
+php glpi/bin/console system:check_requirements
+
+echo_line "Check GLPI database schema integrity"
+php glpi/bin/console database:check_schema_integrity
+
+# echo_line "Install GLPI if database schema is not valid"
+# php glpi/bin/console database:check_schema_integrity || \
+# php glpi/bin/console db:install \
+# --default-language="$GLPI_LANG" \
+# --db-host="$GLPI_DB_HOST" \
+# --db-port="$GLPI_DB_PORT" \
+# --db-name="$GLPI_DB_NAME" \
+# --db-user="$GLPI_DB_USER" \
+# --db-password="$GLPI_DB_PASSWORD" \
+# --no-interaction \
+# --reconfigure
 
 _DATE_TIME=`date`
 echo_line "PHP-FPM Starting ($@) at ${_DATE_TIME}..."
