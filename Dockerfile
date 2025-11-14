@@ -40,6 +40,11 @@ sed -i 's|^group =.*|group = nginx|' /etc/php-fpm.d/www.conf
 sed -i 's|^listen.allowed_clients =.*|;listen.allowed_clients =|' /etc/php-fpm.d/www.conf
 sed -i 's|^;pm.status_path =.*|pm.status_path = /status/fpm|' /etc/php-fpm.d/www.conf
 
+# # Enable PHP logging (not recommended for production environments)
+# sed -i 's|^;catch_workers_output =.*|catch_workers_output = yes|' /etc/php-fpm.d/www.conf
+# sed -i 's|^error_log =.*|error_log = /proc/self/fd/2|' /etc/php-fpm.conf
+# sed -i 's|^;access.log =.*|access.log = /proc/self/fd/2|' /etc/php-fpm.d/www.conf
+
 # The TLS_REQCERT never setting in the context of PHP and LDAP refers to disabling the server
 # certificate validation when establishing a TLS (Transport Layer Security) connection to an LDAP server.
 echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
