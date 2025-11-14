@@ -8,8 +8,8 @@ services:
       - MARIADB_DATABASE=${DB_DATABASE}
       - MARIADB_USER=${DB_USER}
       - MARIADB_PASSWORD=${DB_PASSWORD}
-    ports:
-      - "${DB_PORT}:3306"
+    # ports:
+    #   - "${DB_PORT}:3306"
     volumes:
       - glpi_database:/var/lib/mysql
     restart: unless-stopped
@@ -25,8 +25,8 @@ services:
       - GLPI_DB_PASSWORD=${DB_PASSWORD}
       - GLPI_DB_NAME=${DB_DATABASE}
       - GLPI_DB_PORT=${DB_PORT}
-    ports:
-      - "${FPM_PORT}:9000"
+    # ports:
+    #   - "${FPM_PORT}:9000"
     volumes:
       - glpi_php:/var/www/html/glpi  # Access to GLPI files
       - ./custom-php.ini:/etc/php.d/custom-php.ini # PHP Configurations
