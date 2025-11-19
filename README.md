@@ -100,7 +100,7 @@ glpi-fpm-1  | \-----------------------------------------------------------------
 
 * https://hub.docker.com/r/jarbelix/glpi-fpm/tags
 
-# Wizard Instalation
+# Wizard Installation
 
 * Open a browser with the URL https://localhost
 
@@ -124,11 +124,11 @@ glpi-fpm-1  | \-----------------------------------------------------------------
 
 ![Tela-05](screenshots/glpi-page-05.png)
 
-## Cheking your environment #2
+## Checking your environment #2
 
 ![Tela-06](screenshots/glpi-page-06.png)
 
-## Database conection setup
+## Database connection setup
 
 ![Tela-07](screenshots/glpi-page-07.png)
 
@@ -160,7 +160,7 @@ glpi-fpm-1  | \-----------------------------------------------------------------
 
 ![Tela-14](screenshots/glpi-page-14.png)
 
-## Your Dasboard
+## Your Dashboard
 
 ![Tela-15](screenshots/glpi-page-15.png)
 
