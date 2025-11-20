@@ -188,7 +188,7 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out ngin
 
 # Customizing with Your Preferences
 
-The [Dockerfile](Dockerfile) file is very simple. Take a look and clear up any doubts. I used [AlmaLinux 10](https://almalinux.org/) as a base to install the packages related to PHP. 
+The [Dockerfile](Dockerfile) file is very simple. Take a look and clear up any doubts. I used [AlmaLinux](https://almalinux.org/) as a base to install the packages related to PHP. 
 
 The [docker-compose.yml](docker-compose.yml) file can be edited to reflect your preferences (exposed ports, image versions, etc.).
 
