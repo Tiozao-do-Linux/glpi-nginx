@@ -1,7 +1,9 @@
 services:
 
+  # MariaDB Container
   database:
-    image: mariadb:latest # Database MariaDB
+    image: mariadb:latest
+    hostname: glpi-database
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${DB_DATABASE}
@@ -13,9 +15,10 @@ services:
   # ports:
   #   - "${DB_PORT}:3306"
 
+  # GLPI Container with PHP-FPM
   glpi-fpm:
     build: .
-    image: jarbelix/glpi-fpm # GLPI with php-fpm
+    image: jarbelix/glpi-fpm
     hostname: glpi-fpm
     environment:
       - GLPI_LANG=${GLPI_LANG}
@@ -36,10 +39,12 @@ services:
     depends_on:
       - database
 
+  # Nginx Container - Web server Nginx
   nginx:
-    image: nginx:latest # Web server Nginx
+    image: nginx:latest
+    hostname: glpi-nginx
     volumes:
-      - glpi_php:/var/www/html/glpi # Access to GLPI files
+      - glpi_php:/var/www/html/glpi:ro # Access to GLPI files
       - ./custom-nginx.conf:/etc/nginx/conf.d/default.conf # Nginx Configurations
       - ./nginx.crt:/etc/nginx/ssl/nginx.crt
       - ./nginx.key:/etc/nginx/ssl/nginx.key
