@@ -2,6 +2,8 @@
 
 ![Logo-GLPI-bombado](screenshots/Logo-GLPI-bombado.png)
 
+> Before moving on, please consider giving us a GitHub star ⭐️. Thank you!
+> 
 Although there is already an **Official Version of GLPI** (https://github.com/glpi-project/glpi) on **Docker Hub** (https://hub.docker.com/r/glpi/glpi), I believe it is possible to use other more performant *Docker Images* in a `docker-compose.yml` and just map the source code inside these containers.
 
 ## What do I gain from this?
