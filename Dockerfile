@@ -74,8 +74,8 @@ curl -# -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glp
 # Extract GLPI files
 tar xzf glpi-${LATEST}.tgz --no-same-owner
 
-## Remove downloaded file
-#rm glpi-${LATEST}.tgz
+# Remove downloaded file
+rm glpi-${LATEST}.tgz
 
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
 chown -R nginx:nginx glpi/files glpi/config glpi/marketplace glpi/plugins
