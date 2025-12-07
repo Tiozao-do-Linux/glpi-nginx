@@ -19,6 +19,9 @@ dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarc
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 dnf -y module switch-to php:remi-8.4
 
+# Rsync to avoid conflicts
+dnf -y install rsync
+
 # Extra packages
 dnf -y install epel-release
 dnf -y install net-tools nmap htop
@@ -60,22 +63,29 @@ WORKDIR /var/www/html
 # Install GLPI
 RUN <<EOF
 
+# Where to download GLPI Source Code
+mkdir -p /usr/src/
+cd /usr/src/
+
 # Download and extract latest stable release of GLPI
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
 curl -# -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
-# Extract GLPI
-tar xzvf glpi-${LATEST}.tgz --no-same-owner
+# Extract GLPI files
+tar xzf glpi-${LATEST}.tgz --no-same-owner
 
-# Clean
-rm glpi-${LATEST}.tgz
+## Remove downloaded file
+#rm glpi-${LATEST}.tgz
 
 # Adjust permissions - https://glpi-install.readthedocs.io/en/latest/install/
 chown -R nginx:nginx glpi/files glpi/config glpi/marketplace glpi/plugins
 
+# Copy GLPI to the working directory
+rsync -a /usr/src/glpi/ /var/www/html/glpi/
+
 EOF
 
-# Copy entrypoint
+# Copy entrypoint into the container
 COPY entrypoint.sh /entrypoint.sh
 
 # Defines volumes to be supported

@@ -22,6 +22,7 @@ services:
     hostname: glpi-fpm
     environment:
       - GLPI_LANG=${GLPI_LANG}
+      - GLPI_AUTO_INSTALL=${GLPI_AUTO_INSTALL}
       - GLPI_DB_HOST=${DB_HOST}
       - GLPI_DB_USER=${DB_USER}
       - GLPI_DB_PASSWORD=${DB_PASSWORD}

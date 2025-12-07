@@ -73,28 +73,43 @@ glpi-fpm-1  |    \_/____________________________________________________________
 glpi-fpm-1  | 
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | Show PHP-FPM Version
+glpi-fpm-1  | | Show PHP Version
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | PHP 8.4.14 (fpm-fcgi) (built: Oct 21 2025 19:23:55) (NTS gcc aarch64)
+glpi-fpm-1  | PHP 8.4.15 (cli) (built: Nov 18 2025 17:26:05) (NTS gcc x86_64)
 glpi-fpm-1  | Copyright (c) The PHP Group
 glpi-fpm-1  | Built by Remi's RPM repository <https://rpms.remirepo.net/> #StandWithUkraine
-glpi-fpm-1  | Zend Engine v4.4.14, Copyright (c) Zend Technologies
-glpi-fpm-1  |     with Zend OPcache v8.4.14, Copyright (c), by Zend Technologies
+glpi-fpm-1  | Zend Engine v4.4.15, Copyright (c) Zend Technologies
+glpi-fpm-1  |     with Zend OPcache v8.4.15, Copyright (c), by Zend Technologies
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | PHP-FPM Configuration Test
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | [06-Nov-2025 21:49:10] NOTICE: configuration file /etc/php-fpm.conf test is successful
+glpi-fpm-1  | [07-Dec-2025 16:24:57] NOTICE: configuration file /etc/php-fpm.conf test is successful
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | PHP-FPM Loaded Modules
+glpi-fpm-1  | | PHP Loaded Modules
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | [PHP Modules] apcu bcmath bz2 calendar cgi-fcgi Core ctype curl date dom exif fileinfo filter ftp gd gettext hash iconv intl json ldap libxml mbstring mysqli mysqlnd openssl pcre PDO pdo_mysql pdo_sqlite Phar random Reflection session SimpleXML snmp soap sockets sodium SPL sqlite3 standard tokenizer xml xmlreader xmlwriter xsl Zend OPcache zip zlib
+glpi-fpm-1  | [PHP Modules] apcu bcmath bz2 calendar Core ctype curl date dom exif fileinfo filter ftp gd gettext hash iconv intl json ldap libxml mbstring mysqli mysqlnd openssl pcntl pcre PDO pdo_mysql pdo_sqlite Phar random readline Reflection session SimpleXML snmp soap sockets sodium SPL sqlite3 standard tokenizer xml xmlreader xmlwriter xsl Zend OPcache zip zlib
 glpi-fpm-1  | [Zend Modules] Zend OPcache
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | PHP-FPM Starting (php-fpm -F) at Thu Nov  6 21:49:10 UTC 2025...
+glpi-fpm-1  | | Wait 10 seconds for the database to be ready...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | Unable to connect to database.
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | GLPI is not configured yet. Performing CLI installation
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | 
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | Clearing GLPI cache...
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  | 
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | PHP-FPM Starting (php-fpm -F) at Sun Dec  7 16:25:29 UTC 2025...
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+
 ```
 
 ## My glpi-fpm images in hub.docker.com
