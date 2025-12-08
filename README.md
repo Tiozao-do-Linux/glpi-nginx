@@ -77,11 +77,11 @@ glpi-fpm-1  |
 glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | Show PHP Version
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | PHP 8.4.15 (cli) (built: Nov 18 2025 17:26:05) (NTS gcc x86_64)
+glpi-fpm-1  | PHP 8.5.0 (cli) (built: Nov 18 2025 08:02:20) (NTS gcc x86_64)
 glpi-fpm-1  | Copyright (c) The PHP Group
 glpi-fpm-1  | Built by Remi's RPM repository <https://rpms.remirepo.net/> #StandWithUkraine
-glpi-fpm-1  | Zend Engine v4.4.15, Copyright (c) Zend Technologies
-glpi-fpm-1  |     with Zend OPcache v8.4.15, Copyright (c), by Zend Technologies
+glpi-fpm-1  | Zend Engine v4.5.0, Copyright (c) Zend Technologies
+glpi-fpm-1  |     with Zend OPcache v8.5.0, Copyright (c), by Zend Technologies
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | PHP-FPM Configuration Test

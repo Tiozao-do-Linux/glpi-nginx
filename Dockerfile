@@ -17,14 +17,14 @@ dnf -y install 'dnf-command(config-manager)'
 dnf -y config-manager --set-enabled crb
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
-dnf -y module switch-to php:remi-8.4
+dnf -y module switch-to php:remi-8.5
 
 # Rsync to avoid conflicts
 dnf -y install rsync
 
-# Extra packages
-dnf -y install epel-release
-dnf -y install net-tools nmap htop
+# # Extra packages
+# dnf -y install epel-release
+# dnf -y install net-tools nmap htop
 
 # Update packages
 dnf -y upgrade
