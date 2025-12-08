@@ -53,29 +53,18 @@ fi
 echo_line "Wait 10 seconds for the database to be ready..."
 sleep 10
 
-# echo_line "See GLPI Console Commands Available:"
-# php glpi/bin/console
-
-# echo_line "Check system requirements to run GLPI"
 if ! php glpi/bin/console -q system:check_requirements
 then
     echo_line "Requirements not met! Exiting...";
     exit 1
 fi
 
-# echo_line "Check if GLPI is already confgured"
 if php glpi/bin/console -q database:check_schema_integrity
 then
-    echo_line "GLPI is already configured."
-    echo_line "Enable maintenance mode"
-    php glpi/bin/console -q maintenance:enable
-    echo_line "Update database schema if needed"
+    echo_line "GLPI is already configured. Update database schema if needed"
     php glpi/bin/console -q database:update --no-interaction
-    echo_line "Disable maintenance mode"
-    php glpi/bin/console -q maintenance:disable
 else
     if [ "$GLPI_AUTO_INSTALL" = "true" ]; then
-
         echo_line "GLPI is not configured yet. Performing CLI installation"
         php glpi/bin/console -q db:install \
         --default-language="$GLPI_LANG" \
@@ -87,9 +76,9 @@ else
         --no-interaction \
         --reconfigure
     
-        # Without this, sometimes GLPI shows error 500
+        # Without this, sometimes GLPI shows:
         # Oops! An Error Occurred - The server returned a "500 Internal Server Error"
-        echo_line "Clearing GLPI cache..."
+        echo_line "Clearing GLPI cache to avoid '500 Internal Server Error'"
         # php glpi/bin/console -q cache:clear
         rm -rf glpi/files/_cache/${GLPI_VERSION_INSTALLED}*
     
