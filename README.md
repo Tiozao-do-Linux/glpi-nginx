@@ -216,3 +216,7 @@ The [custom-php.ini](custom-php.ini) file contains the PHP variable configuratio
 ## Important
 
 In **production** mode, adjust the locations in `custom-nginx.conf` to allow only your networks. Comment out the 'allow all' line and uncomment the line corresponding to your network.
+
+# Backup
+
+See [complete-backup script](complete-backup.md)

@@ -6,3 +6,4 @@ glpi/*
 plugins/*
 Dockerfile
 docker-compose.yml
+backups/*
