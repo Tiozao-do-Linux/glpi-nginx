@@ -103,11 +103,14 @@ glpi-fpm-1  | /-----------------------------------------------------------------
 glpi-fpm-1  | | GLPI is not configured yet. Performing CLI installation
 glpi-fpm-1  | \------------------------------------------------------------------------------/
 glpi-fpm-1  | 
-glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | Clearing GLPI cache...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | 
+glpi-fpm-1  |
+glpi-fpm-1  | /------------------------------------------------------------------------------\
+glpi-fpm-1  | | Enable GLPI Cron for Automatic Actions
+glpi-fpm-1  | \------------------------------------------------------------------------------/
+glpi-fpm-1  |
 glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | PHP-FPM Starting (php-fpm -F) at Sun Dec  7 16:25:29 UTC 2025...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
@@ -119,6 +122,9 @@ glpi-fpm-1  | \-----------------------------------------------------------------
 * https://hub.docker.com/r/jarbelix/glpi-fpm/tags
 
 # Wizard Installation
+
+> [!IMPORTANT]
+> If you want to manually follow the Wizard as per the documentation at https://glpi-install.readthedocs.io/en/latest/install/wizard.html, change the GLPI_AUTO_INSTALL variable from "true" to "false" in the .env file; otherwise, the Wizard will run automatically via php glpi/bin/console.
 
 * Open a browser with the URL https://localhost
 
