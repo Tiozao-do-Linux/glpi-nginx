@@ -22,6 +22,9 @@ dnf -y module switch-to php:remi-8.5
 # Rsync to avoid conflicts
 dnf -y install rsync
 
+# Cron for GLPI automatic actions
+dnf -y install cronie
+
 # # Extra packages
 # dnf -y install epel-release
 # dnf -y install net-tools nmap htop

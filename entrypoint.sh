@@ -81,6 +81,15 @@ else
     fi
 fi
 
+echo_line "Enable GLPI Cron for Automatic Actions"
+cat > /etc/cron.d/glpi << _EOF_
+# GLPI Cron
+* * * * * root php /var/www/html/glpi/front/cron.php > /dev/null 2>&1
+_EOF_
+
+# Start cron daemon in background
+crond -s    # -s: log cron jobs to syslog
+
 _DATE_TIME=`date`
 echo_line "PHP-FPM Starting ($@) at ${_DATE_TIME}..."
 
