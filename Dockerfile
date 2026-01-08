@@ -16,8 +16,8 @@ RUN <<EOF
 # dnf -y install epel-release
 # dnf -y install net-tools nmap htop
 
-# Update packages
-dnf -y upgrade
+# # Update packages
+# dnf -y upgrade
 
 # Configure PHP repository Remi - https://rpms.remirepo.net/
 dnf -y install 'dnf-command(config-manager)'
