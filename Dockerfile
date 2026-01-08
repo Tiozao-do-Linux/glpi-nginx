@@ -12,6 +12,13 @@ LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.co
 # Install necessary packages
 RUN <<EOF
 
+# # Extra packages
+# dnf -y install epel-release
+# dnf -y install net-tools nmap htop
+
+# Update packages
+dnf -y upgrade
+
 # Configure PHP repository Remi - https://rpms.remirepo.net/
 dnf -y install 'dnf-command(config-manager)'
 dnf -y config-manager --set-enabled crb
@@ -47,13 +54,6 @@ sed -i 's|^;pm.status_path =.*|pm.status_path = /status/fpm|' /etc/php-fpm.d/www
 # The TLS_REQCERT never setting in the context of PHP and LDAP refers to disabling the server
 # certificate validation when establishing a TLS (Transport Layer Security) connection to an LDAP server.
 echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
-
-# # Extra packages
-# dnf -y install epel-release
-# dnf -y install net-tools nmap htop
-
-# # Update packages
-# dnf -y upgrade
 
 # Clean up
 dnf clean all
