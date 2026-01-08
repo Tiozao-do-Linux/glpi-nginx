@@ -25,13 +25,6 @@ dnf -y install rsync
 # Cron for GLPI automatic actions
 dnf -y install cronie
 
-# # Extra packages
-# dnf -y install epel-release
-# dnf -y install net-tools nmap htop
-
-# # Update packages
-# dnf -y upgrade
-
 # Necessary packages
 dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
 
@@ -54,6 +47,13 @@ sed -i 's|^;pm.status_path =.*|pm.status_path = /status/fpm|' /etc/php-fpm.d/www
 # The TLS_REQCERT never setting in the context of PHP and LDAP refers to disabling the server
 # certificate validation when establishing a TLS (Transport Layer Security) connection to an LDAP server.
 echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
+
+# # Extra packages
+# dnf -y install epel-release
+# dnf -y install net-tools nmap htop
+
+# Update packages
+dnf -y upgrade
 
 # Clean up
 dnf clean all
