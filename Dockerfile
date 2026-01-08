@@ -52,8 +52,8 @@ echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
 # dnf -y install epel-release
 # dnf -y install net-tools nmap htop
 
-# Update packages
-dnf -y upgrade
+# # Update packages
+# dnf -y upgrade
 
 # Clean up
 dnf clean all
