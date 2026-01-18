@@ -10,7 +10,7 @@ Although there is already an **Official Version of GLPI** (https://github.com/gl
 - The [docker-compose.yml](docker-compose.yml) file is very simple. Take a look.
 - If NGINX or MariaDB receives an update, it will not be necessary to rebuild the glpi-fpm image.
 - If PHP or GLPI itself receives an update, it will be necessary to create a new glpi-fpm image to reflect the updates. This procedure is performed daily by the [workflow](.github/workflows/build-and-push-multi-platform.yml).
-- The [jarbelix/glpi-fpm](https://hub.docker.com/r/jarbelix/glpi-fpm/tags?name=latest) image supports both *amd64* and *arm64* architectures, while [glpi/glpi](https://hub.docker.com/r/glpi/glpi/tags?name=latest) image only supports *amd64*.
+- The [jarbelix/glpi-fpm](https://hub.docker.com/r/jarbelix/glpi-fpm/tags?name=latest) image supports both *amd64* and *arm64* architectures, while [glpi/glpi](https://hub.docker.com/r/glpi/glpi/tags?name=latest) image ~~only supports *amd64*~~. Today (January 17, 2026) I noticed that this request (https://github.com/glpi-project/docker-images/issues/245) was accepted on January 6, 2026.
 - Why PHP-FPM with Nginx ?
   - Understanding PHP-FPM - https://dev.to/arsalanmee/understanding-php-fpm-a-comprehensive-guide-3ng8
   - Demystifying Nginx and PHP-FPM - https://medium.com/@mgonzalezbaile/demystifying-nginx-and-php-fpm-for-php-developers-bba548dd38f9
