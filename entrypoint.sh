@@ -46,7 +46,7 @@ fi
 echo_line "Wait 10 seconds for the database to be ready..."
 sleep 10
 
-if ! php glpi/bin/console system:check_requirements
+if ! php glpi/bin/console -q system:check_requirements
 then
     echo_line "Requirements not met! Exiting...";
     exit 1
