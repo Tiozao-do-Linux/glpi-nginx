@@ -18,7 +18,7 @@ services:
   # GLPI Container with PHP-FPM
   glpi-fpm:
     build: .
-    image: jarbelix/glpi-fpm
+    image: jarbelix/glpi-fpm:latest
     hostname: glpi-fpm
     environment:
       - GLPI_LANG=${GLPI_LANG}
