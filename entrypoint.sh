@@ -41,6 +41,7 @@ GLPI_VERSION_INSTALLED=`ls /var/www/html/glpi/version/`
 if [ "$GLPI_VERSION_SRC" != "$GLPI_VERSION_INSTALLED" ]; then
     echo_line "The GLPI version has been changed"
     rsync -a /usr/src/glpi/ /var/www/html/glpi/
+    echo_line "Please execute: docker volume rm glpi-nginx_glpi_php"
 fi
 
 echo_line "Wait 10 seconds for the database to be ready..."
@@ -67,19 +68,19 @@ else
         --db-user="$GLPI_DB_USER" \
         --db-password="$GLPI_DB_PASSWORD" \
         --no-interaction \
-        --reconfigure
-    
-        # Without this, sometimes GLPI shows:
-        # Oops! An Error Occurred - The server returned a "500 Internal Server Error"
-        # glpi/vendor/symfony/error-handler/Resources/views/error.html.php
-        echo_line "Clearing GLPI cache to avoid '500 Internal Server Error'"
-        # php glpi/bin/console -q cache:clear
-        rm -rf glpi/files/_cache/${GLPI_VERSION_INSTALLED}*
+        --reconfigure  
     
     else
         echo_line "GLPI is not configured yet. Please use wizard at https://<your-domain>"
     fi
 fi
+
+# Without this, sometimes GLPI shows:
+# Oops! An Error Occurred - The server returned a "500 Internal Server Error"
+# glpi/vendor/symfony/error-handler/Resources/views/error.html.php
+echo_line "Clearing GLPI cache to avoid '500 Internal Server Error'"
+php glpi/bin/console -q cache:clear
+rm -rf glpi/files/_cache/${GLPI_VERSION_INSTALLED}*
 
 echo_line "Enable GLPI Cron for Automatic Actions"
 cat > /etc/cron.d/glpi << _EOF_
