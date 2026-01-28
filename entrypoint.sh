@@ -80,7 +80,7 @@ fi
 # glpi/vendor/symfony/error-handler/Resources/views/error.html.php
 echo_line "Clearing GLPI cache to avoid '500 Internal Server Error'"
 php glpi/bin/console -q cache:clear
-rm -rf glpi/files/_cache/${GLPI_VERSION_INSTALLED}*
+rm -rf glpi/files/_cache/*
 
 echo_line "Enable GLPI Cron for Automatic Actions"
 cat > /etc/cron.d/glpi << _EOF_
