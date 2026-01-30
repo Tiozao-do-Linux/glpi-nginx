@@ -13,8 +13,8 @@ on:
   #     - '!LICENSE'
   #     - '!**/docker-compose.yml'
 
-  schedule:
-    - cron: '0 0 * * *' # Example: Runs every day at midnight UTC
+  # schedule:
+  #   - cron: '0 0 * * *' # Example: Runs every day at midnight UTC
     # - cron: '0 13 * * *' # Evety day at 13:00 UTC. Every day at 09:00 GMT-4 (Campo Grande/MS) ===> 09 + 4 = 13 UTC
 
   workflow_dispatch:
