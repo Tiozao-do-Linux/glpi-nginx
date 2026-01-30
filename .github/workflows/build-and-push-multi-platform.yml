@@ -13,15 +13,65 @@ on:
   #     - '!LICENSE'
   #     - '!**/docker-compose.yml'
 
+  workflow_dispatch:
+
+  repository_dispatch:
+    types: [glpi_release]
+
   # schedule:
   #   - cron: '0 0 * * *' # Example: Runs every day at midnight UTC
     # - cron: '0 13 * * *' # Evety day at 13:00 UTC. Every day at 09:00 GMT-4 (Campo Grande/MS) ===> 09 + 4 = 13 UTC
 
-  workflow_dispatch:
+permissions:
+  contents: write     # required to update the .glpi_latest_release file
+  packages: write
+  id-token: write
 
 jobs:
 
+  check_release:
+    name: Verify last release of glpi-project/glpi
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+      tag: ${{ steps.check.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find last release of glpi-project/glpi
+        id: check
+        run: |
+          latest=$(curl -s https://api.github.com/repos/glpi-project/glpi/releases/latest | jq -r .tag_name)
+          echo "tag=$latest" >> $GITHUB_OUTPUT
+
+          prev=""
+          if [ -f .glpi_latest_release ]; then
+            prev=$(cat .glpi_latest_release | tr -d '\n')
+          fi
+
+          if [ "$latest" = "$prev" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No new releases (tag: $latest). Exiting."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "New release detected: $latest (previous: $prev)"
+            # Update the file with the new tag for future execution.
+            echo "$latest" > .glpi_latest_release
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .glpi_latest_release
+            git commit -m "ci: update last glpi release to $latest" || echo "no changes to commit"
+            git push origin HEAD:${GITHUB_REF#refs/heads/} || echo "Push failed — check permissions"
+          fi
+
   build-and-push:
+    name: Build e Push multi-platform (only if there is a new release)
+    needs: check_release
+    if: needs.check_release.outputs.changed == 'true'
+
     runs-on: ubuntu-latest
 
     steps:
