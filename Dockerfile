@@ -175,7 +175,7 @@ RUN <<_EOF_
 # https://github.com/glpi-project/docker-images/issues/230
 # PHP Warning:  Constant GLPI_CONFIG_DIR already defined, this will be an error in PHP 9
 
-cat > ${GLPI_HOME_DIR}/config/local_define.php << _INSIDE_EOF_
+cat > /var/www/glpi/config/local_define.php << _INSIDE_EOF_
 <?php
 define('GLPI_CONFIG_DIR', '${GLPI_CONFIG_DIR}');
 define('GLPI_VAR_DIR', '${GLPI_VAR_DIR}');
