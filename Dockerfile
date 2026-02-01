@@ -71,18 +71,18 @@ WORKDIR ${GLPI_HOME_DIR}
 # Install GLPI
 RUN <<_EOF_
 
-# Up one level to download and extract GLPI
-cd ..
+# # Up one level to download and extract GLPI
+# cd ..
 
 # Download and extract latest stable release of GLPI
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
 curl -s -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
 # Extract GLPI files
-tar xzf glpi-${LATEST}.tgz --no-same-owner -C ./ 2>/dev/null
+tar xzf glpi-${LATEST}.tgz --no-same-owner --strip-components=1
 
 # Remove downloaded file
-rm glpi-${LATEST}.tgz
+# rm -f glpi-${LATEST}.tgz
 
 # Set proper permissions
 chown -R ${GLPI_USER}:${GLPI_GROUP} ${GLPI_HOME_DIR}
