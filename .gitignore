@@ -4,4 +4,3 @@ database/*
 glpi/*
 plugins/*
 backups/*
-.glpi_latest_release
