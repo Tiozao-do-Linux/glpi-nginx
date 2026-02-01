@@ -76,6 +76,9 @@ cd ${HOME_DIR}
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
 curl -s -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
+# Test integrity of downloaded file
+tar tf glpi-$LATEST.tgz
+
 # Extract GLPI files
 tar xzf glpi-$LATEST.tgz
 
