@@ -65,56 +65,42 @@ docker compose logs glpi-fpm -f --tail 50
 ```
 
 ```
+
 glpi-fpm-1  |  ____________________________________________________________________________
 glpi-fpm-1  | /\                                                                           \
 glpi-fpm-1  | \_|         PHP-FPM - https://github.com/Tiozao-do-Linux/glpi-nginx          |
-glpi-fpm-1  |   |                                                                          |
-glpi-fpm-1  |   |         with files /etc/php-fpm.conf and /etc/php-fpm.d/www.conf         |
 glpi-fpm-1  |   |   _______________________________________________________________________|_
 glpi-fpm-1  |    \_/_________________________________________________________________________/
 glpi-fpm-1  | 
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | Show PHP Version
-glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | PHP 8.5.0 (cli) (built: Nov 18 2025 08:02:20) (NTS gcc x86_64)
-glpi-fpm-1  | Copyright (c) The PHP Group
-glpi-fpm-1  | Built by Remi's RPM repository <https://rpms.remirepo.net/> #StandWithUkraine
-glpi-fpm-1  | Zend Engine v4.5.0, Copyright (c) Zend Technologies
-glpi-fpm-1  |     with Zend OPcache v8.5.0, Copyright (c), by Zend Technologies
-glpi-fpm-1  | 
-glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | PHP-FPM Configuration Test
-glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | [07-Dec-2025 16:24:57] NOTICE: configuration file /etc/php-fpm.conf test is successful
-glpi-fpm-1  | 
-glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | PHP Loaded Modules
-glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | [PHP Modules] apcu bcmath bz2 calendar Core ctype curl date dom exif fileinfo filter ftp gd gettext hash iconv intl json ldap libxml mbstring mysqli mysqlnd openssl pcntl pcre PDO pdo_mysql pdo_sqlite Phar random readline Reflection session SimpleXML snmp soap sockets sodium SPL sqlite3 standard tokenizer xml xmlreader xmlwriter xsl Zend OPcache zip zlib
-glpi-fpm-1  | [Zend Modules] Zend OPcache
-glpi-fpm-1  | 
-glpi-fpm-1  | /------------------------------------------------------------------------------\
 glpi-fpm-1  | | Wait 10 seconds for the database to be ready...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  | Unable to connect to database.
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | GLPI is not configured yet. Performing CLI installation
+glpi-fpm-1  | | Check GLPI Requirements
 glpi-fpm-1  | \------------------------------------------------------------------------------/
 glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | Clearing GLPI cache...
+glpi-fpm-1  | | GLPI is not configured yet. Performing CLI installation. Please wait...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  |
+glpi-fpm-1  | 
+glpi-fpm-1  | 
+glpi-fpm-1  | Welcome to
+glpi-fpm-1  | 
+glpi-fpm-1  |  ██████╗ ██╗     ██████╗ ██╗
+glpi-fpm-1  | ██╔════╝ ██║     ██╔══██╗██║
+glpi-fpm-1  | ██║  ███╗██║     ██████╔╝██║
+glpi-fpm-1  | ██║   ██║██║     ██╔═══╝ ██║
+glpi-fpm-1  | ╚██████╔╝███████╗██║     ██║
+glpi-fpm-1  |  ╚═════╝ ╚══════╝╚═╝     ╚═╝
+glpi-fpm-1  | 
 glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | Enable GLPI Cron for Automatic Actions
+glpi-fpm-1  | | Starting GLPI at Sun Feb  1 02:19:06 UTC 2026...
 glpi-fpm-1  | \------------------------------------------------------------------------------/
-glpi-fpm-1  |
-glpi-fpm-1  | /------------------------------------------------------------------------------\
-glpi-fpm-1  | | PHP-FPM Starting (php-fpm -F) at Sun Dec  7 16:25:29 UTC 2025...
-glpi-fpm-1  | \------------------------------------------------------------------------------/
-
+glpi-fpm-1  | [GLPI Cron Job][Sun Feb  1 02:19:07 UTC 2026][nginx] : [php /var/www/html/glpi/front/cron.php]
+glpi-fpm-1  | [GLPI Cron Job][Sun Feb  1 02:20:07 UTC 2026][nginx] : [php /var/www/html/glpi/front/cron.php]
+glpi-fpm-1  | [GLPI Cron Job][Sun Feb  1 02:21:07 UTC 2026][nginx] : [php /var/www/html/glpi/front/cron.php]
 ```
 
 ## My glpi-fpm images in hub.docker.com
