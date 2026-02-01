@@ -65,21 +65,19 @@ usermod -d ${HOME_DIR} ${GLPI_USER}
 
 _EOF_
 
-# Where the GLPI files will be stored inside the container
-WORKDIR ${GLPI_HOME_DIR}
 
 # Install GLPI
 RUN <<_EOF_
 
-# # Up one level to download and extract GLPI
-# cd ..
+mkdir -p ${HOME_DIR}
+cd ${HOME_DIR}
 
 # Download and extract latest stable release of GLPI
 LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/' '/^location/ {sub("\r","",$NF); print $NF }'`
 curl -s -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
 # Extract GLPI files
-tar xzf glpi-${LATEST}.tgz --no-same-owner --strip-components=1
+tar xzf glpi-${LATEST}.tgz --no-same-owner
 
 # Remove downloaded file
 # rm -f glpi-${LATEST}.tgz
@@ -90,9 +88,6 @@ chown -R ${GLPI_USER}:${GLPI_GROUP} ${GLPI_HOME_DIR}
 # Create a directory for persistent files
 mkdir -p ${GLPI_DATA_DIR}
 chown -R ${GLPI_USER}:${GLPI_GROUP} ${GLPI_DATA_DIR}
-
-# # Set group sticky bit on data directory to maintain group ownership
-# chmod -R g+s ${GLPI_DATA_DIR}
 
 _EOF_
 
@@ -167,6 +162,9 @@ stderr_logfile_maxbytes=0
 _INSIDE_EOF_
 
 _EOF_
+
+# Where the GLPI files will be stored inside the container
+WORKDIR ${GLPI_HOME_DIR}
 
 # Copy entrypoint into the container
 COPY entrypoint.sh /entrypoint.sh
