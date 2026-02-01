@@ -17,11 +17,16 @@ You make backups to protect against data loss from hardware failure, accidental 
 
 # Example
 ```
-# ./complete-backup.sh 
-Starting backup to ./backups/2025-12-14_11-35-23...
+$ ./complete-backup.sh 
+Starting backup to ./backups/2026-02-01_15-21-17...
 Dumping database...
 Database dump completed.
 Backing up volume: glpi-nginx_glpi-config
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+61dfb50712f5: Pull complete 
+Digest: sha256:e226d6308690dbe282443c8c7e57365c96b5228f0fe7f40731b5d84d37a06839
+Status: Downloaded newer image for busybox:latest
 Volume glpi-nginx_glpi-config backed up.
 Backing up volume: glpi-nginx_glpi-files
 Volume glpi-nginx_glpi-files backed up.
@@ -41,24 +46,23 @@ Backed up nginx.crt
 Backed up nginx.key
 Backed up .env
 Backed up docker-compose.yml
-Backup completed successfully. Files are in ./backups/2025-12-14_11-35-23.
+Backup completed successfully. Files are in ./backups/2026-02-01_15-21-17.
 
-# ls -l ./backups/2025-12-14_11-35-23/
-total 92432
--rw-rw-r-- 1 jarbelix jarbelix     1769 dez 14 11:35 custom-nginx.conf
--rw-rw-r-- 1 jarbelix jarbelix     2151 dez 14 11:35 custom-php.ini
--rw-rw-r-- 1 jarbelix jarbelix   114898 dez 14 11:35 db_dump.sql.gz
--rw-rw-r-- 1 jarbelix jarbelix     1851 dez 14 11:35 docker-compose.yml
--rw-r--r-- 1 root     root         2103 dez 14 11:35 glpi-config.tar.gz
--rw-r--r-- 1 root     root      5577639 dez 14 11:35 glpi_database.tar.gz
--rw-r--r-- 1 root     root       413724 dez 14 11:35 glpi-files.tar.gz
--rw-r--r-- 1 root     root           86 dez 14 11:35 glpi-marketplace.tar.gz
--rw-r--r-- 1 root     root     88495028 dez 14 11:35 glpi_php.tar.gz
--rw-r--r-- 1 root     root           89 dez 14 11:35 glpi-plugins.tar.gz
--rw-rw-r-- 1 jarbelix jarbelix       16 dez 14 11:35 info.php
--rw-rw-r-- 1 jarbelix jarbelix     1294 dez 14 11:35 nginx.crt
--rw-rw-r-- 1 jarbelix jarbelix     1704 dez 14 11:35 nginx.key
-
+$ ls -l ./backups/2026-02-01_15-21-17/
+total 5864
+-rw-rw-r-- 1 jarbelix jarbelix    1899 fev  1 15:21 custom-nginx.conf
+-rw-rw-r-- 1 jarbelix jarbelix    2371 fev  1 15:21 custom-php.ini
+-rw-rw-r-- 1 jarbelix jarbelix  119875 fev  1 15:21 db_dump.sql.gz
+-rw-rw-r-- 1 jarbelix jarbelix    1750 fev  1 15:21 docker-compose.yml
+-rw-r--r-- 1 root     root          85 fev  1 15:21 glpi-config.tar.gz
+-rw-r--r-- 1 root     root     5835185 fev  1 15:21 glpi_database.tar.gz
+-rw-r--r-- 1 root     root          85 fev  1 15:21 glpi-files.tar.gz
+-rw-r--r-- 1 root     root          85 fev  1 15:21 glpi-marketplace.tar.gz
+-rw-r--r-- 1 root     root          87 fev  1 15:21 glpi_php.tar.gz
+-rw-r--r-- 1 root     root          85 fev  1 15:21 glpi-plugins.tar.gz
+-rw-rw-r-- 1 jarbelix jarbelix      16 fev  1 15:21 info.php
+-rw-rw-r-- 1 jarbelix jarbelix    1294 fev  1 15:21 nginx.crt
+-rw-rw-r-- 1 jarbelix jarbelix    1704 fev  1 15:21 nginx.key
 ```
 
 # Backup Automation Tip
