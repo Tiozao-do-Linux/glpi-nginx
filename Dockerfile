@@ -177,10 +177,10 @@ RUN <<_EOF_
 
 cat > /var/www/glpi/config/local_define.php << _INSIDE_EOF_
 <?php
-define('GLPI_CONFIG_DIR', '${GLPI_CONFIG_DIR}');
-define('GLPI_VAR_DIR', '${GLPI_VAR_DIR}');
-define('GLPI_LOG_DIR', '${GLPI_LOG_DIR}');
-define('GLPI_MARKETPLACE_DIR', '${GLPI_MARKETPLACE_DIR}');
+define('GLPI_CONFIG_DIR', '/var/glpi/config');
+define('GLPI_VAR_DIR', '/var/glpi/files');
+define('GLPI_LOG_DIR', '/var/glpi/logs');
+define('GLPI_MARKETPLACE_DIR', '/var/glpi/marketplace');
 _INSIDE_EOF_
 
 _EOF_
