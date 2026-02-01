@@ -79,7 +79,7 @@ LATEST=`curl -sI https://github.com/glpi-project/glpi/releases/latest | awk -F'/
 curl -s -L "https://github.com/glpi-project/glpi/releases/download/${LATEST}/glpi-${LATEST}.tgz" -o glpi-${LATEST}.tgz
 
 # Extract GLPI files
-tar xzf glpi-${LATEST}.tgz --no-same-owner -C ./
+tar xzf glpi-${LATEST}.tgz --no-same-owner -C ./ 2>/dev/null
 
 # Remove downloaded file
 rm glpi-${LATEST}.tgz
