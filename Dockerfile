@@ -171,11 +171,13 @@ _EOF_
 RUN <<_EOF_
 
 # Create local_define.php to set custom directories
+
 # https://github.com/glpi-project/docker-images/issues/230
+# PHP Warning:  Constant GLPI_CONFIG_DIR already defined, this will be an error in PHP 9
+
 cat > ${GLPI_HOME_DIR}/config/local_define.php << _INSIDE_EOF_
 <?php
 define('GLPI_CONFIG_DIR', '${GLPI_CONFIG_DIR}');
-# PHP Warning:  Constant GLPI_CONFIG_DIR already defined, this will be an error in PHP 9
 define('GLPI_VAR_DIR', '${GLPI_VAR_DIR}');
 define('GLPI_LOG_DIR', '${GLPI_LOG_DIR}');
 define('GLPI_MARKETPLACE_DIR', '${GLPI_MARKETPLACE_DIR}');
