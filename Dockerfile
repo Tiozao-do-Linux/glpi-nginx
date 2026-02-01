@@ -30,32 +30,32 @@ RUN <<_EOF_
 # Install necessary packages
 
 # Configure PHP repository Remi - https://rpms.remirepo.net/
-dnf -y install 'dnf-command(config-manager)'
-dnf -y config-manager --set-enabled crb
-dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
-dnf -y module switch-to php:remi-8.5
+dnf -qy install 'dnf-command(config-manager)'
+dnf -qy config-manager --set-enabled crb
+dnf -qy install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+dnf -qy install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+dnf -qy module switch-to php:remi-8.5
 
 # Cron for GLPI automatic actions
-#dnf -y install cronie procps-ng supervisor
-dnf -y install supervisor
+#dnf -qy install cronie procps-ng supervisor
+dnf -qy install supervisor
 
 # Necessary packages
-dnf -y install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
+dnf -qy install php-{fpm,cli,ldap,soap,curl,snmp,zip,apcu,gd,mbstring,xml,bz2,intl,bcmath,mysqlnd}
 
 # Additional PHP extensions
-dnf -y install php-{opcache,sodium}
+dnf -qy install php-{opcache,sodium}
 
 # The TLS_REQCERT never setting in the context of PHP and LDAP refers to disabling the server
 # certificate validation when establishing a TLS (Transport Layer Security) connection to an LDAP server.
 echo -e "TLS_REQCERT\tnever" >> /etc/openldap/ldap.conf
 
 # Extra packages
-dnf -y install epel-release
-dnf -y install net-tools nmap htop
+dnf -qy install epel-release
+dnf -qy install net-tools nmap htop
 
 # # Update packages
-# dnf -y upgrade
+# dnf -qy upgrade
 
 # Clean up
 dnf clean all
