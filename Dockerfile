@@ -168,22 +168,6 @@ _INSIDE_EOF_
 
 _EOF_
 
-RUN <<_EOF_
-
-# Create local_define.php to set custom directories
-# PHP Warning:  Constant GLPI_CONFIG_DIR already defined, this will be an error in PHP 9
-# https://github.com/glpi-project/docker-images/issues/230
-
-cat > /var/www/glpi/config/local_define.php << '_INSIDE_EOF_'
-define('GLPI_CONFIG_DIR', '/var/glpi/config');
-define('GLPI_VAR_DIR', '/var/glpi/files');
-define('GLPI_LOG_DIR', '/var/glpi/logs');
-define('GLPI_MARKETPLACE_DIR', '/var/glpi/marketplace');
-_INSIDE_EOF_
-
-_EOF_
-
-
 # Copy entrypoint into the container
 COPY entrypoint.sh /entrypoint.sh
 

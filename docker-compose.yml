@@ -34,6 +34,7 @@ services:
       - glpi_data:/var/glpi # GLPI Data Directory
       - ./custom-php.ini:/etc/php.d/custom-php.ini # PHP Configurations
       - ./info.php:/var/www/glpi/public/info.php # Remove this line to disable info.php in production
+      - ./local_define.php:/var/www/glpi/config/local_define.php # Custom GLPI directories
     restart: unless-stopped
     depends_on:
       - database
