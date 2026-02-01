@@ -14,6 +14,12 @@ on:
   #     - '!**/docker-compose.yml'
 
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forçar build/push mesmo sem novo release'
+        required: false
+        default: false
+        type: boolean
 
   repository_dispatch:
     types: [glpi_release]
@@ -70,7 +76,7 @@ jobs:
   build-and-push:
     name: Build e Push multi-platform (only if there is a new release)
     needs: check_release
-    if: needs.check_release.outputs.changed == 'true'
+    if: needs.check_release.outputs.changed == 'true' || github.event.inputs.force == 'true'
 
     runs-on: ubuntu-latest
 
