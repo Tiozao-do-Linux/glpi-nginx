@@ -168,9 +168,6 @@ _EOF_
 # Copy entrypoint into the container
 COPY entrypoint.sh /entrypoint.sh
 
-# Where the GLPI files will be stored inside the container
-WORKDIR ${GLPI_HOME_DIR}
-
 # Defines volumes to be supported
 VOLUME [ ${GLPI_HOME_DIR} ${GLPI_DATA_DIR} ]
 
